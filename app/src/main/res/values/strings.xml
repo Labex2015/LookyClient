@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Looky</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--SETTINGS-->
+    <string name="FINALIZE_HELP">Finalizar ajuda</string>
+
+    <!--DIALOGS-->
+    <string name="FINALIZE_DIALOG">Deseja finalizar a ajuda?</string>
+    <string name="YES">SIM</string>
+    <string name="NO">NÃO</string>
+    <string name="NEW_KNOWLEDGE_TITLE">Novo conhecimento</string>
+
+    <!--NOTIFICATIONS-->
+    <string name="HELP_ACCEPT">Pedido de ajuda aceito!</string>
+    <string name="HELP_DENIED">Pedido de ajuda negado!</string>
+    <string name="HELP_TITLE">PEDIDO DE AJUDA</string>
+
+    <!--BUTTONS-->
+    <string name="help_button">BUSCAR AJUDA</string>
+
+
+
+    <!--LOG ERROR-->
+    <string name="TAG_CONNECTION">CONEXÃO</string>
+    <string name="CONNECTION_ERROR">Sem internet</string>
+
+    <!--ERRORS-->
+    <string name="required_field">Campo Obrigatório</string>
+    <string name="OPERATION_FAIL">Operação não pode ser realizada.</string>
+    <string name="LIST_EMPTY_USERS_TO_HELP">Hmmm, no momento não há nenhuma pessoa disponível para lhe ajudar!</string>
+
+    <!-- WARNINGS -->
+    <string name="SUCCESS">Ação executada com sucesso.</string>
+
+    <!-- MENU -->
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- List Helpers -->
+    <string name="list_helpers_label_page">Pessoas que podem lhe ajudar:</string>
+    <string name="list_helpers_text_distance">Está a 50 metros de você.</string>
+
+    <!-- Request Help -->
+    <string name="request_help_label_page">Digite um conhecimento pelo qual você precisa de ajuda. Exemplo: JAVA.</string>
+
+</resources>

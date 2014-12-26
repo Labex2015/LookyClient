@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue_app">#1F87AC</color>
+    <color name="purple_app">#5F237D</color>
+    <color name="orange_app">#C74F2F</color>
+    <color name="dark_gray_fonts_app">#434142</color>
+    <color name="light_gray_fonts_app">#989898</color>
+    <color name="bg_app">#EBEBED</color>
+    <color name="dark_table_app">#DDDCDC</color>
+    <color name="light_table_app">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+</resources>

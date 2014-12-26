@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/bg_avatar"
+        android:layout_below="@+id/item_helper_labelPage">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/imgb_User"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/default_avatar"/>
+    </RelativeLayout>
+
+    <TextView
+    android:id="@+id/text_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_toRightOf="@+id/rl_avatar"
+    android:layout_toEndOf="@+id/rl_avatar"
+    android:layout_below="@+id/item_helper_labelPage"
+    android:padding="0dp"
+    android:textSize="16pt"
+    android:textColor="#000000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/text_distance"
+        android:layout_below="@id/text_name"
+        android:layout_toRightOf="@+id/rl_avatar"
+        android:layout_toEndOf="@+id/rl_avatar"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:padding="0dp"
+        android:textSize="10pt"
+        android:textColor="@color/light_gray_fonts_app"/>
+
+</RelativeLayout>

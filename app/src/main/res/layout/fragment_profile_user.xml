@@ -1,0 +1,26 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="labex.feevale.br.looky.view.fragment.ProfileUserFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|top">
+
+      <include
+          layout="@layout/profile_top"
+          android:layout_width="match_parent"
+          android:id="@+id/layout_profile"
+          android:layout_height="wrap_content"></include>
+
+        <ListView
+            android:id="@+id/listV_knowledges"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_profile"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</FrameLayout>

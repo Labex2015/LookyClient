@@ -48,13 +48,19 @@ public class GcmMessageHandler extends IntentService{
         message = extras.getString("body");
         messageTypeToRedirect = extras.getString("type");
         type = Integer.parseInt(messageTypeToRedirect);
-        if(type == GCMVariables.CHAT){
-            sendNotification(message);
+        switch (type) {
+            case GCMVariables.CHAT:
+                notifyMessage(message);
+                break;
+            case GCMVariables.TYPE_REQUEST_HELP:
+                break;
+            case GCMVariables.TYPE_RESPONSE_HELP:
+                break;
         }
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
-    public void sendNotification(String response) {
+    public void notifyMessage(String response) {
         chatResponse = new JsonUtils().JsonToChatResponse(message);
         Bundle argsBundle = new Bundle();
         argsBundle.putSerializable("CHAT2", chatResponse);

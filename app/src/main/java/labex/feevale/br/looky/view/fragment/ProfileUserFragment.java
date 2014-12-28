@@ -19,6 +19,7 @@ import java.util.List;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.User;
+import labex.feevale.br.looky.service.SendRequestUserHelpService;
 import labex.feevale.br.looky.view.adapter.KnowledgeAdapter;
 
 /**
@@ -54,7 +55,7 @@ public class ProfileUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_profile_user, container, false);
-
+        view.setOnLongClickListener(requestHelpListener());
         textName        = (TextView) view.findViewById(R.id.text_name);
         textDistance    = (TextView) view.findViewById(R.id.text_distance);
         imgBUser        = (ImageView) view.findViewById(R.id.imgb_User);
@@ -87,5 +88,14 @@ public class ProfileUserFragment extends Fragment {
         };
     }
 
+    private View.OnLongClickListener requestHelpListener(){
+        return new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                new SendRequestUserHelpService(getActivity(),user.getId()).execute();
+                return true;
+            }
+        };
+    }
 
 }

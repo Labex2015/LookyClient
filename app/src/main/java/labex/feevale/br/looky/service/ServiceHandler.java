@@ -1,5 +1,7 @@
 package labex.feevale.br.looky.service;
 
+import android.util.Log;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -33,6 +35,7 @@ public abstract class ServiceHandler {
                     HttpPost httpPost = new HttpPost(url);
                     if (params != null) {
                         StringEntity se = new StringEntity(params.toString());
+                        Log.e("JSON",params.toString());
                         se.setContentEncoding("UTF-8");
                         se.setContentType("application/json");
                         httpPost.setEntity(se);

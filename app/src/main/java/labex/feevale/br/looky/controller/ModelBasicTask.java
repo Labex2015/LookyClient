@@ -38,8 +38,8 @@ public abstract class ModelBasicTask extends AsyncTask<Void, MessageResponse, Me
 
             if(messageResponse.getStatus())
                 onSuccess();
-
-            onFail();
+            else
+                onFail();
     }
 
     public abstract void onFail();

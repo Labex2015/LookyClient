@@ -15,6 +15,7 @@ import java.util.List;
 
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.User;
+import labex.feevale.br.looky.service.LoadProfileService;
 import labex.feevale.br.looky.view.adapter.ListHelperAdapter;
 
 /**
@@ -47,11 +48,7 @@ public class ListHelpersFragment extends Fragment {
         listHelpers.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                //TODO: Chamar tela de pedido de ajuda!!
-                //ChatFragment chatFragment = new ChatFragment((MainActivity)context);
-                //((MainActivity) context).changeFragment(chatFragment);
-
+                    new LoadProfileService(getActivity()).execute(userList.get(i).getId());
             }
         });
 

@@ -23,6 +23,7 @@ import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.service.RequestHelpService;
 import labex.feevale.br.looky.utils.PreferencesHelp;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.wrapper.HelpWrapper;
 
 
@@ -39,15 +40,7 @@ public class RequestHelpFragment extends Fragment{
 
     List<String> mAreaList;
     List<String> mStringResult;
-    final static String AUXI_A = "A";
-    final static String AUXI_E = "E";
-    final static String AUXI_O = "O";
-    final static String AUXI_DA = "DA";
-    final static String AUXI_DE = "DE";
-    final static String AUXI_DI = "DI";
-    final static String AUXI_DO = "DO";
-    final static String AUXI_EM = "EM";
-    final static String AUXI_NA = "NA";
+    final static String PREPOSITIONS[] = {" A "," E "," O "," DA "," DE "," DI "," DO "," EM "," NA "};
 
     public RequestHelpFragment(List<String> mAreaList) {
         this.mAreaList = mAreaList;
@@ -105,38 +98,21 @@ public class RequestHelpFragment extends Fragment{
         if(!tags.getText().toString().isEmpty()){
 
             String auxi = tags.getText().toString().trim().toUpperCase();
-            String auxi2;
-            int position = auxi.indexOf(" ");
+
             mStringResult = new ArrayList<String>();
+            for(String s : PREPOSITIONS)
+                auxi.replaceAll(s, " ");
 
-            if(position != -1){
-                //enquanto tiver espaço
-                while(position != -1){
-                    auxi2    = auxi.substring(0, position);
-
-                    if(!auxi2.equals(AUXI_A) && !auxi2.equals(AUXI_E) && !auxi2.equals(AUXI_O) && !auxi2.equals(AUXI_DA) &&
-                            !auxi2.equals(AUXI_DE) && !auxi2.equals(AUXI_DO) && !auxi2.equals(AUXI_DI) && !auxi2.equals(AUXI_EM) && !auxi2.equals(AUXI_NA))
-                        mStringResult.add(auxi2);
+            String[] values = auxi.trim().split(" ");
 
 
-                    auxi = auxi.substring(position + 1);
-
-                    position = auxi.indexOf(" ");
-
-                    if(position == -1)
-                        mStringResult.add(auxi);
-                }
-            }
-
-            //TODO enviar para o webservice
-            PreferencesHelp preferencesHelp = new PreferencesHelp(context);
-            User user = preferencesHelp.getUserToPreferences();
+            User user = new SharedPreferencesUtils().getUSer(getActivity());
             HelpWrapper helpWrapper = new HelpWrapper();
             helpWrapper.user = user;
-            helpWrapper.searchTerms = (String[])mStringResult.toArray();
-            helpWrapper.text = "O usuário " + user.getUserName() + ", precisa de ajuda.";
+            helpWrapper.searchTerms = values;
+            helpWrapper.text = "O usuario " + user.getUserName() + ", precisa de ajuda.";
 
-            RequestHelpService requestHelpService = new RequestHelpService(context);
+            RequestHelpService requestHelpService = new RequestHelpService(getActivity());
             requestHelpService.execute(helpWrapper);
 
 

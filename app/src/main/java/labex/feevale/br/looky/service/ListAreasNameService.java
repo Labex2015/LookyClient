@@ -38,6 +38,7 @@ public class ListAreasNameService extends ServiceHandler {
     @Override
     protected void postExecute(String response) {
         names.addAll(new JsonUtils().jsonStringList(response));
+        messageResponse.setStatus(true);
     }
 
     @Override

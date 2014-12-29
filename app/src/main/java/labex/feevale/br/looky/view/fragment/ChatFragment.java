@@ -45,6 +45,7 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
     private Activity activity;
     private Long idFrom;
     private Long idTo;
+    private Boolean comeFromNotification = false;
 
     public ChatFragment(Activity activity, Long idFrom, Long idTo) {
         this.activity = activity;
@@ -57,7 +58,7 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
         this.chatResponse = chatResponse;
         this.idTo = chatResponse.getIdFrom();
         this.idFrom = new SharedPreferencesUtils().getUSer(activity).getId();
-        setReponse(chatResponse);
+        this.comeFromNotification = true;
     }
 
     @Override
@@ -69,6 +70,13 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
             setRetainInstance(true);
             this.processChat = this;
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(comeFromNotification)
+            setReponse(chatResponse);
     }
 
     @Nullable

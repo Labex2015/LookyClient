@@ -79,15 +79,10 @@ public class GcmMessageHandler extends IntentService{
         Intent chat = new Intent(this, MainActivity.class);
         chat.putExtra(GCMVariables.ITEM_TO_LOAD, GCMVariables.CHAT);
         chat.putExtra("TYPE_FRAG", argsBundle);
-        builder = new NotificationCompat.Builder(this);
-        builder.setContentTitle(chatResponse.getUserFrom());
-        builder.setContentText(chatResponse.getText());
-        builder.setTicker("New Message !");
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 1000,chat, PendingIntent.FLAG_CANCEL_CURRENT);
-        builder.setContentIntent(contentIntent);
-        builder.setAutoCancel(true);
-        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(1313, builder.build());
+
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 1000,chat, 0);
+        showNotification(getApplicationContext(), "Nova mensagem!", chatResponse.getText(),
+                getResources().getString(R.string.app_name), R.drawable.ic_launcher, contentIntent);
     }
 
     public void notifyRequestUserHelp(String response) {

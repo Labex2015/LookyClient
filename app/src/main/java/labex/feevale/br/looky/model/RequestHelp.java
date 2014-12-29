@@ -8,6 +8,8 @@ import java.io.Serializable;
  */
 public class RequestHelp implements Serializable{
 
+    public static final long serialVersionUID = 421L;
+
     Long id;
     Area area;
     String text;

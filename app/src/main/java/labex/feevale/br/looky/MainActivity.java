@@ -16,11 +16,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.Arrays;
 import java.util.List;
 
 import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.service.CancelHelpService;
+import labex.feevale.br.looky.service.GCMService;
 import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.view.adapter.DrawerAdapter;
 import labex.feevale.br.looky.view.adapter.DrawerHandler;
@@ -85,20 +88,17 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         Intent intent = getIntent();
         Bundle params = intent.getBundleExtra("TYPE_FRAG");
         if(params != null) {
-            Log.e("BUNDLE",getIntent().getExtras().containsKey("TYPE_FRAG")+"");
+            /*Log.e("BUNDLE",getIntent().getExtras().containsKey("TYPE_FRAG")+"");
             Log.e("BUNDLE",params.containsKey("ITEM_TO_LOAD")+"");
             Log.e("BUNDLE",params.containsKey("REQUEST")+"");
-            int getFromNotification = intent.getBundleExtra("TYPE_FRAG").getInt(GCMVariables.ITEM_TO_LOAD);
-            switch (getFromNotification) {
-                case GCMVariables.CHAT:
-                    //ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
-                    //changeFragment(new ChatFragment(this, chatResponse));
-                    break;
-                case GCMVariables.TYPE_REQUEST_HELP:
-                    break;
+            int getFromNotification = intent.getBundleExtra("TYPE_FRAG").getInt(GCMVariables.ITEM_TO_LOAD);*/
+            if(params.containsKey("CHAT")) {
+                ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
+                changeFragment(new ChatFragment(this, chatResponse));
+            }else if(params.containsKey("REQUEST")){
+                Toast.makeText(this, "Solicitação", Toast.LENGTH_LONG).show();
             }
         }
-
     }
 
     @Override

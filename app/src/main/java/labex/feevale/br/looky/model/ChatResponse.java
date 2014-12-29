@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class ChatResponse implements Serializable{
 
+    static final long serialVersionUID =-5782800554270555368L;
+
     private Long idFrom;
     private String userFrom;
     private Double longitude;

@@ -18,15 +18,14 @@ import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 public class SendDeniedRequest extends ServiceHandler {
 
     private Activity activity;
-    private Long idUserToRequest;
     private ProgressDialog dialog;
     private ResponseHelp responseHelp;
+    private MessageResponse messageResponse;
 
-
-    public SendDeniedRequest(Activity activity, Long idUserToRequest, ResponseHelp responseHelp) {
+    public SendDeniedRequest(Activity activity, ResponseHelp responseHelp, MessageResponse messageResponse) {
         this.activity = activity;
-        this.idUserToRequest = idUserToRequest;
         this.responseHelp = responseHelp;
+        this.messageResponse = messageResponse;
     }
 
     @Override
@@ -45,10 +44,15 @@ public class SendDeniedRequest extends ServiceHandler {
 
     @Override
     protected void postExecute(String response) {
-        MessageResponse messageResponse = new JsonUtils().JsonToMessageResponse(response);
+        MessageResponse serverResponse = new JsonUtils().JsonToMessageResponse(response);
         closeDialog();
-        if(messageResponse != null)
-            Toast.makeText(activity, messageResponse.getMsg(), Toast.LENGTH_LONG).show();
+        if(serverResponse != null) {
+            this.messageResponse.setMsg(serverResponse.getMsg());
+            this.messageResponse.setStatus(serverResponse.getStatus());
+        }else{
+            this.messageResponse.setMsg("Problemas no envio de notificação!");
+            this.messageResponse.setStatus(false);
+        }
     }
 
     @Override

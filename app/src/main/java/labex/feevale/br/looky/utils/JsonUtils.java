@@ -9,6 +9,7 @@ import java.util.List;
 import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.Message;
+import labex.feevale.br.looky.model.RequestHelp;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.wrapper.HelpResponseWrapper;
 import labex.feevale.br.looky.wrapper.HelpWrapper;
@@ -102,6 +103,11 @@ public class JsonUtils {
         postExecute();
         return mGson.fromJson(response, new TypeToken<List<String>>() {
         }.getType());
+    }
+
+    public RequestHelp JsonToRequestHelp(String response){
+        postExecute();
+        return mGson.fromJson(response, RequestHelp.class);
     }
 
 }

@@ -2,6 +2,7 @@ package labex.feevale.br.looky.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Created by Jeferson on 09/12/2014.
  * ticket 1.1
  */
-public class User {
+public class User implements Serializable{
     @Expose
     private Long idUser;
     @Expose

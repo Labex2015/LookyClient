@@ -2,11 +2,13 @@ package labex.feevale.br.looky.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by Jeferson on 09/12/2014.
  * ticket 1.1
  */
-public class Area {
+public class Area implements Serializable{
     @Expose
     private Long id;
     @Expose

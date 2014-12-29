@@ -1,18 +1,28 @@
 package labex.feevale.br.looky.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Jeferson on 10/12/2014.
  * ticket 3.1
  */
-public class RequestHelp {
+public class RequestHelp implements Serializable{
 
     Long id;
     Area area;
     String text;
+    User user;
 
-    public RequestHelp(String text, Area area) {
-        this.text = text;
+    public RequestHelp(Area area, String text) {
         this.area = area;
+        this.text = text;
+    }
+
+    public RequestHelp(Long id, Area area, String text, User user) {
+        this.id = id;
+        this.area = area;
+        this.text = text;
+        this.user = user;
     }
 
     public Long getId() {
@@ -37,5 +47,13 @@ public class RequestHelp {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

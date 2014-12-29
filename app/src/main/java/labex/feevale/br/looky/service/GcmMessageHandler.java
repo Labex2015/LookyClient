@@ -1,18 +1,24 @@
 package labex.feevale.br.looky.service;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import labex.feevale.br.looky.MainActivity;
+import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.ChatResponse;
+import labex.feevale.br.looky.model.RequestHelp;
 import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 
@@ -25,7 +31,7 @@ public class GcmMessageHandler extends IntentService{
     private String messageTypeToRedirect;
     private Integer type;
     private Handler handler;
-    private NotificationCompat.Builder notification;
+    private NotificationCompat.Builder builder;
     private NotificationManager manager;
     private ChatResponse chatResponse;
 
@@ -48,32 +54,79 @@ public class GcmMessageHandler extends IntentService{
         message = extras.getString("body");
         messageTypeToRedirect = extras.getString("type");
         type = Integer.parseInt(messageTypeToRedirect);
-        switch (type) {
-            case GCMVariables.CHAT:
-                notifyMessage(message);
-                break;
-            case GCMVariables.TYPE_REQUEST_HELP:
-                break;
-            case GCMVariables.TYPE_RESPONSE_HELP:
-                break;
-        }
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                switch (type) {
+                    case GCMVariables.CHAT:
+                        notifyMessage(message);
+                        break;
+                    case GCMVariables.TYPE_REQUEST_HELP:
+                        notifyRequestUserHelp(message);
+                        break;
+                    case GCMVariables.TYPE_RESPONSE_HELP:
+                        break;
+                }
+            }
+        });
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
     public void notifyMessage(String response) {
         chatResponse = new JsonUtils().JsonToChatResponse(message);
         Bundle argsBundle = new Bundle();
-        argsBundle.putSerializable("CHAT2", chatResponse);
+        argsBundle.putSerializable("CHAT", chatResponse);
         Intent chat = new Intent(this, MainActivity.class);
+        chat.putExtra(GCMVariables.ITEM_TO_LOAD, GCMVariables.CHAT);
         chat.putExtra("TYPE_FRAG", argsBundle);
-        notification = new NotificationCompat.Builder(this);
-        notification.setContentTitle(chatResponse.getUserFrom());
-        notification.setContentText(chatResponse.getText());
-        notification.setTicker("New Message !");
+        builder = new NotificationCompat.Builder(this);
+        builder.setContentTitle(chatResponse.getUserFrom());
+        builder.setContentText(chatResponse.getText());
+        builder.setTicker("New Message !");
         PendingIntent contentIntent = PendingIntent.getActivity(this, 1000,chat, PendingIntent.FLAG_CANCEL_CURRENT);
-        notification.setContentIntent(contentIntent);
-        notification.setAutoCancel(true);
+        builder.setContentIntent(contentIntent);
+        builder.setAutoCancel(true);
         manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, notification.build());
+        manager.notify(1313, builder.build());
+    }
+
+    public void notifyRequestUserHelp(String response) {
+        RequestHelp request = new JsonUtils().JsonToRequestHelp(message);
+        Bundle argsBundle = new Bundle();
+        argsBundle.putSerializable("REQUEST", request);
+        Intent helpIntent = new Intent(this, MainActivity.class);
+        helpIntent.putExtra(GCMVariables.ITEM_TO_LOAD, GCMVariables.TYPE_REQUEST_HELP);
+        helpIntent.putExtra("TYPE_FRAG", argsBundle);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, helpIntent, 0);
+        showNotification(getApplicationContext(), "Solicitação de ajuda!", request.getText(),
+                getResources().getString(R.string.app_name), R.drawable.ic_launcher, contentIntent);
+    }
+
+    public void showNotification(Context context, String title, String message, String ticker, int icon, PendingIntent contentIntent){
+
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setTicker(ticker);
+        builder.setContentTitle(title);
+        builder.setContentText(message);
+
+        if(contentIntent != null)
+            builder.setContentIntent(contentIntent);
+
+        builder.setSmallIcon(icon);
+        builder.setDefaults(NotificationCompat.DEFAULT_SOUND);
+        builder.setDefaults(NotificationCompat.DEFAULT_LIGHTS);
+        builder.setAutoCancel(true);
+        builder.setSound(alarmSound);
+
+        Notification notification = builder.build();
+        notification.vibrate = new long[]{150, 300, 150, 450};
+
+        notificationManager.notify(1, notification);
+
     }
 }

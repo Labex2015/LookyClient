@@ -26,6 +26,7 @@ import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.model.Message;
 import labex.feevale.br.looky.service.utils.ProcessChat;
 import labex.feevale.br.looky.utils.MessageResponse;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**
  * Created by 0146596 on 11/12/2014.
@@ -49,6 +50,14 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
         this.activity = activity;
         this.idFrom = idFrom;
         this.idTo = idTo;
+    }
+
+    public ChatFragment(Activity activity, ChatResponse chatResponse) {
+        this.activity = activity;
+        this.chatResponse = chatResponse;
+        this.idTo = chatResponse.getIdFrom();
+        this.idFrom = new SharedPreferencesUtils().getUSer(activity).getId();
+        setReponse(chatResponse);
     }
 
     @Override
@@ -88,7 +97,7 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
         return viewChat;
     }
 
-    public void setReponseForTest(ChatResponse response){
+    public void setReponse(ChatResponse response){
         //Log.e("CHAT", response.getText());
         LinearLayout rowChat = new LinearLayout(getActivity());
         rowChat.setOrientation(LinearLayout.HORIZONTAL);
@@ -161,7 +170,7 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
             chatResponse = (ChatResponse) intent.getSerializableExtra("CHAT");
             //chatResponse = new JsonUtils().JsonToChatResponse(intent.getStringExtra("CHAT"));
             if(chatResponse != null)
-                setReponseForTest(chatResponse);
+                setReponse(chatResponse);
             else
                 Log.e("LOG","Não veio o chat!");
         }

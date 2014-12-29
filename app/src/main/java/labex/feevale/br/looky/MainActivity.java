@@ -18,10 +18,14 @@ import android.widget.ListView;
 import java.util.Arrays;
 import java.util.List;
 
+import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.service.CancelHelpService;
+import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.view.adapter.DrawerAdapter;
 import labex.feevale.br.looky.view.adapter.DrawerHandler;
 import labex.feevale.br.looky.view.adapter.ItemAdapter;
+import labex.feevale.br.looky.view.fragment.ChatFragment;
+
 import static labex.feevale.br.looky.R.id.drawer_layout;
 import static labex.feevale.br.looky.R.id.navigation_drawer;
 
@@ -77,7 +81,18 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         //changeFragment(new ChatFragment(this));
 
         //new LoadProfileService(MainActivity.this).execute(1L);
-
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            int getFromNotification = bundle.getInt(GCMVariables.ITEM_TO_LOAD, 0);
+            switch (getFromNotification) {
+                case GCMVariables.CHAT:
+                    ChatResponse chatResponse = (ChatResponse) bundle.getSerializable("CHAT");
+                    //changeFragment(new ChatFragment(this, chatResponse));
+                    break;
+                case GCMVariables.TYPE_REQUEST_HELP:
+                    break;
+            }
+        }
 
     }
 

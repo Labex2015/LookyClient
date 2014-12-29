@@ -11,5 +11,8 @@ public final class GCMVariables {
     public static final int TYPE_REQUEST_HELP = 1;
     public static final int TYPE_RESPONSE_HELP = 2;
     public static final int CHAT = 3;
+
+
+    public static final String ITEM_TO_LOAD =  "ITEM_TO_LOAD";
 }
 

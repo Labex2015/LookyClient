@@ -59,7 +59,7 @@ public class SharedPreferencesUtils {
             return user;
         }else{
 
-            User u = new User(1L, "pablo", "pablogilvan@gmail.com", 454,3434.3);
+            User u = new User(2L, "jeferson", "jefersonklaus@gmail.com", 455,334.3);
             return u;
             //return null;TODO: Deixar o null
         }

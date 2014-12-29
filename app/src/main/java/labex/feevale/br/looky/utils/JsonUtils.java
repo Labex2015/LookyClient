@@ -10,6 +10,7 @@ import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.Message;
 import labex.feevale.br.looky.model.RequestHelp;
+import labex.feevale.br.looky.model.ResponseHelp;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.wrapper.HelpResponseWrapper;
 import labex.feevale.br.looky.wrapper.HelpWrapper;
@@ -24,6 +25,11 @@ public class JsonUtils {
     public HelpWrapper JsonToRequest(String response){
         postExecute();
         return mGson.fromJson(response, HelpWrapper.class);
+    }
+
+    public String ResponseHelptToJson( ResponseHelp responseHelp){
+        preExecute();
+        return mGson.toJson(responseHelp);
     }
 
     public String RequestToJson(HelpWrapper helpWrapper){

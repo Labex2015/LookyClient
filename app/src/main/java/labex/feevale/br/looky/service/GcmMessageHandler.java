@@ -94,8 +94,8 @@ public class GcmMessageHandler extends IntentService{
         RequestHelp request = new JsonUtils().JsonToRequestHelp(message);
         Bundle argsBundle = new Bundle();
         argsBundle.putSerializable("REQUEST", request);
+        argsBundle.putInt(GCMVariables.ITEM_TO_LOAD, GCMVariables.TYPE_REQUEST_HELP);
         Intent helpIntent = new Intent(this, MainActivity.class);
-        helpIntent.putExtra(GCMVariables.ITEM_TO_LOAD, GCMVariables.TYPE_REQUEST_HELP);
         helpIntent.putExtra("TYPE_FRAG", argsBundle);
 
         PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, helpIntent, 0);

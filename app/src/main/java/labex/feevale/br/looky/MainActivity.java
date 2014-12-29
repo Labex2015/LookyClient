@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -81,12 +82,16 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         //changeFragment(new ChatFragment(this));
 
         //new LoadProfileService(MainActivity.this).execute(1L);
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
-            int getFromNotification = bundle.getInt(GCMVariables.ITEM_TO_LOAD, 0);
+        Intent intent = getIntent();
+        Bundle params = intent.getBundleExtra("TYPE_FRAG");
+        if(params != null) {
+            Log.e("BUNDLE",getIntent().getExtras().containsKey("TYPE_FRAG")+"");
+            Log.e("BUNDLE",params.containsKey("ITEM_TO_LOAD")+"");
+            Log.e("BUNDLE",params.containsKey("REQUEST")+"");
+            int getFromNotification = intent.getBundleExtra("TYPE_FRAG").getInt(GCMVariables.ITEM_TO_LOAD);
             switch (getFromNotification) {
                 case GCMVariables.CHAT:
-                    ChatResponse chatResponse = (ChatResponse) bundle.getSerializable("CHAT");
+                    //ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
                     //changeFragment(new ChatFragment(this, chatResponse));
                     break;
                 case GCMVariables.TYPE_REQUEST_HELP:

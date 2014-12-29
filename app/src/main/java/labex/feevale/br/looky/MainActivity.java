@@ -22,13 +22,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import labex.feevale.br.looky.model.ChatResponse;
+import labex.feevale.br.looky.model.RequestHelp;
 import labex.feevale.br.looky.service.CancelHelpService;
 import labex.feevale.br.looky.service.GCMService;
 import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.view.adapter.DrawerAdapter;
 import labex.feevale.br.looky.view.adapter.DrawerHandler;
 import labex.feevale.br.looky.view.adapter.ItemAdapter;
+import labex.feevale.br.looky.view.dialogs.DialogMaker;
+import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
+import labex.feevale.br.looky.wrapper.Request;
 
 import static labex.feevale.br.looky.R.id.drawer_layout;
 import static labex.feevale.br.looky.R.id.navigation_drawer;
@@ -96,7 +100,13 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
                 ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
                 changeFragment(new ChatFragment(this, chatResponse));
             }else if(params.containsKey("REQUEST")){
-                Toast.makeText(this, "Solicitação", Toast.LENGTH_LONG).show();
+                RequestHelp requestHelp = (RequestHelp)params.getSerializable("REQUEST");
+                if(requestHelp != null){
+                    RequestHelpDialogActions actions = new RequestHelpDialogActions(requestHelp.getUser(), this);
+                    new DialogMaker("Solicitação de ajuda", requestHelp.getText(), actions).createDialog(this).show();
+                }
+
+
             }
         }
     }

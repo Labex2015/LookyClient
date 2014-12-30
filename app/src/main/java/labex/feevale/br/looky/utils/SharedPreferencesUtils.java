@@ -58,10 +58,7 @@ public class SharedPreferencesUtils {
             }
             return user;
         }else{
-
-            User u = new User(2L, "jeferson", "jefersonklaus@gmail.com", 455,334.3);
-            return u;
-            //return null;TODO: Deixar o null
+           return null;
         }
     }
 }

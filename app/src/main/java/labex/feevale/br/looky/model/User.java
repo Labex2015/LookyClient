@@ -15,6 +15,7 @@ public class User implements Serializable{
     private Long idUser;
     @Expose
     private String username;
+    @Expose
     private String password;
     @Expose
     private String email;
@@ -23,7 +24,16 @@ public class User implements Serializable{
     private double latitude;
     @Expose
     private double longitude;
+    @Expose
+    private String userKey;
 
+    public String getUserKey() {
+        return userKey;
+    }
+
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
+    }
 
     public User(String userName, String password, String email, List<Knowledge> knowledges){
         this.username = userName;

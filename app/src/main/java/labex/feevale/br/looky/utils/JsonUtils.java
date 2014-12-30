@@ -15,6 +15,7 @@ import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.wrapper.HelpResponseWrapper;
 import labex.feevale.br.looky.wrapper.HelpWrapper;
 import labex.feevale.br.looky.wrapper.KnowledgeWrapper;
+import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**
  * Created by 0118230 on 12/12/2014.
@@ -45,6 +46,11 @@ public class JsonUtils {
     public String UserToJson(User user){
         preExecute();
         return mGson.toJson(user);
+    }
+
+    public String RegisterLoginToJson(RegisterLogin registerLogin){
+        preExecute();
+        return mGson.toJson(registerLogin);
     }
 
     public MessageResponse JsonToMessageResponse(String response){

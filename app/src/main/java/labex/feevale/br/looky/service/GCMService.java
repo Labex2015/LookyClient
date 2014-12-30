@@ -9,7 +9,9 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
 
+import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.service.utils.GCMVariables;
+import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**
  * Created by 0126128 on 18/12/2014.
@@ -18,10 +20,16 @@ public class GCMService extends AsyncTask<Void, String,String>{
 
     private GoogleCloudMessaging gcm;
     private Activity activity;
+    private RegisterLogin registerLogin;
+    private int operation;
+    public static final int LOGIN = 1;
+    public static final int REGISTER = 2;
 
-    public GCMService(Activity activity) {
+    public GCMService(Activity activity, RegisterLogin registerLogin, int operation) {
         gcm = GoogleCloudMessaging.getInstance(activity);
         this.activity = activity;
+        this.registerLogin = registerLogin;
+        this.operation = operation;
     }
 
     @Override
@@ -33,7 +41,7 @@ public class GCMService extends AsyncTask<Void, String,String>{
                 gcm = GoogleCloudMessaging.getInstance(activity.getApplicationContext());
             }
             regid = gcm.register(GCMVariables.PROJECT_NUMBER);
-            msg = "Device registered, registration ID=" + regid;
+            msg = regid;
             Log.i("GCM", msg);
 
         } catch (IOException ex) {
@@ -45,6 +53,14 @@ public class GCMService extends AsyncTask<Void, String,String>{
 
     @Override
     protected void onPostExecute(String s) {
-        Log.e("GCM", s);
+        registerLogin.setUserKey(s);
+        switch (operation){
+            case LOGIN:
+                new LoginService(activity,registerLogin).execute();
+                break;
+            case REGISTER:
+                new RegisterService(activity,registerLogin).execute();
+                break;
+        }
     }
 }

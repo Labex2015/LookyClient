@@ -2,10 +2,10 @@ package labex.feevale.br.looky.service;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.widget.Toast;
 
 import labex.feevale.br.looky.R;
+import labex.feevale.br.looky.model.ResponseHelp;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.utils.AppHelp;
 import labex.feevale.br.looky.utils.AppVariables;
@@ -15,15 +15,15 @@ import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**
- * Created by 0118230 on 30/12/2014.
+ * Created by 0118230 on 29/12/2014.
  */
-public class LoginService extends ServiceHandler {
+public class RegisterService extends ServiceHandler {
+
     private Activity activity;
     private ProgressDialog dialog;
     private RegisterLogin registerLogin;
 
-
-    public LoginService(Activity activity, RegisterLogin registerLogin) {
+    public RegisterService(Activity activity, RegisterLogin registerLogin) {
         this.activity = activity;
         this.registerLogin = registerLogin;
     }
@@ -60,7 +60,7 @@ public class LoginService extends ServiceHandler {
     @Override
     public void execute() {
         JsonUtils jsonUtils = new JsonUtils();
-        makeServiceCall(AppVariables.URL+ AppVariables.LOGIN_USER,POST,jsonUtils.RegisterLoginToJson(registerLogin) );
+        makeServiceCall(AppVariables.URL+ AppVariables.REGISTER_USER,POST,jsonUtils.RegisterLoginToJson(registerLogin) );
     }
 
     private void closeDialog(){
@@ -68,4 +68,3 @@ public class LoginService extends ServiceHandler {
             dialog.dismiss();
     }
 }
-

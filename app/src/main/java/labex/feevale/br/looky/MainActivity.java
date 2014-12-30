@@ -34,6 +34,7 @@ import labex.feevale.br.looky.view.dialogs.DialogMaker;
 import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
 import labex.feevale.br.looky.view.fragment.LoginFragment;
+import labex.feevale.br.looky.view.fragment.RegisterFragment;
 import labex.feevale.br.looky.wrapper.Request;
 
 import static labex.feevale.br.looky.R.id.drawer_layout;
@@ -92,7 +93,7 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
 
         //new LoadProfileService(MainActivity.this).execute(1L);
         //Login
-        if(new SharedPreferencesUtils().getUSer(this).getId() != null) {
+        if(new SharedPreferencesUtils().getUSer(this).getId() == null) {
             changeFragment(new LoginFragment(this));
         }
 
@@ -150,8 +151,10 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         this.mFragment = fragment;
-        if(mFragment instanceof LoginFragment)
+        if(mFragment instanceof LoginFragment || mFragment instanceof RegisterFragment)
             getActionBar().hide();
+        else
+            getActionBar().show();
     }
 
 

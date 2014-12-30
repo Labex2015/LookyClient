@@ -32,6 +32,7 @@
 
     <!--ERRORS-->
     <string name="required_field">Campo Obrigatório</string>
+    <string name="field_not_match">Senha não confere</string>
     <string name="OPERATION_FAIL">Operação não pode ser realizada.</string>
     <string name="LIST_EMPTY_USERS_TO_HELP">Hmmm, no momento não há nenhuma pessoa disponível para lhe ajudar!</string>
 
@@ -49,11 +50,14 @@
     <!-- Request Help -->
     <string name="request_help_label_page">Digite um conhecimento pelo qual você precisa de ajuda. Exemplo: JAVA.</string>
 
-    <!-- Login -->
+    <!-- Login/Register -->
     <string name="HINT_EMAIL">Email </string>
     <string name="HINT_PASSWORD">Senha </string>
+    <string name="HINT_PASSWORD2">Repita a Senha </string>
     <string name="BTN_LOGIN">LOGIN </string>
+    <string name="BTN_NEXT">AVANÇAR </string>
     <string name="LINK_REGISTER">CADASTRAR </string>
+    <string name="HINT_NAME">Name </string>
 
 </resources>
 

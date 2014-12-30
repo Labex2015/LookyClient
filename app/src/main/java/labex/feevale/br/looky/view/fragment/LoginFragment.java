@@ -1,6 +1,7 @@
 package labex.feevale.br.looky.view.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
+import labex.feevale.br.looky.model.User;
+import labex.feevale.br.looky.service.GCMService;
 import labex.feevale.br.looky.service.LoginService;
+import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**
  * Created by Jeferson on 30/12/2014
@@ -58,7 +63,7 @@ public class LoginFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO ir para tela de cadastro
+                ((MainActivity)context).changeFragment(new RegisterFragment(context));
             }
         };
     }
@@ -83,9 +88,11 @@ public class LoginFragment extends Fragment {
                 }
 
                 if(!error){
-                   //TODO logar
-                    LoginService loginService = new LoginService(getActivity());
-                    loginService.execute();
+                    RegisterLogin registerLogin = new RegisterLogin();
+                    registerLogin.setEmail(email);
+                    registerLogin.setPassword(password);
+
+                    new GCMService((Activity)context,registerLogin,GCMService.LOGIN).execute();
                 }
             }
         };

@@ -11,6 +11,17 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center_horizontal|top">
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/edt_name"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:hint="@string/HINT_NAME"
+            android:imeOptions="actionNext"
+            android:focusable="true"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -20,7 +31,8 @@
             android:id="@+id/edt_email"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:hint="@string/HINT_EMAIL"/>
+            android:hint="@string/HINT_EMAIL"
+            android:imeOptions="actionNext"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -31,6 +43,17 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:hint="@string/HINT_PASSWORD"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/edt_password2"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:hint="@string/HINT_PASSWORD2"
             android:imeOptions="actionDone"/>
 
     </LinearLayout>
@@ -38,7 +61,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/BTN_LOGIN"
-        android:id="@+id/btn_login"
+        android:text="@string/BTN_NEXT"
+        android:id="@+id/btn_next"
         android:layout_gravity="center_horizontal|bottom" />
 </FrameLayout>

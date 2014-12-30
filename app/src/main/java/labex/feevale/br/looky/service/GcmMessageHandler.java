@@ -21,6 +21,7 @@ import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.model.RequestHelp;
 import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
+import labex.feevale.br.looky.utils.MessageResponse;
 
 /**
  * Created by 0126128 on 18/12/2014.
@@ -65,6 +66,7 @@ public class GcmMessageHandler extends IntentService{
                         notifyRequestUserHelp(message);
                         break;
                     case GCMVariables.TYPE_RESPONSE_HELP:
+
                         break;
                 }
             }
@@ -98,6 +100,19 @@ public class GcmMessageHandler extends IntentService{
                 getResources().getString(R.string.app_name), R.drawable.ic_launcher, contentIntent);
     }
 
+    public void notifyResponseUser(String response) {
+        MessageResponse messageResponse = new JsonUtils().JsonToMessageResponse(response);
+        Bundle argsBundle = new Bundle();
+        argsBundle.putSerializable("RESPONSE", messageResponse);
+        Intent helpIntent = new Intent(this, MainActivity.class);
+        helpIntent.putExtra("TYPE_FRAG", argsBundle);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, helpIntent, 0);
+        showNotification(getApplicationContext(), "Seu pedido de ajuda foi respondido!", messageResponse.getMsg(),
+                getResources().getString(R.string.app_name), R.drawable.ic_launcher, contentIntent);
+    }
+
+
     public void showNotification(Context context, String title, String message, String ticker, int icon, PendingIntent contentIntent){
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -120,8 +135,6 @@ public class GcmMessageHandler extends IntentService{
 
         Notification notification = builder.build();
         notification.vibrate = new long[]{150, 300, 150, 450};
-
         notificationManager.notify(1, notification);
-
     }
 }

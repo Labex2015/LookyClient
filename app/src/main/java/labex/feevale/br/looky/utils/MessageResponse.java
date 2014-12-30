@@ -1,9 +1,13 @@
 package labex.feevale.br.looky.utils;
 
+import java.io.Serializable;
+
 /**
  * Created by PabloGilvan on 26/08/2014.
  */
-public class MessageResponse {
+public class MessageResponse implements Serializable{
+
+    static final long serialVersionUID =-326280055423255368L;
 
     private String message;
     private Boolean status;

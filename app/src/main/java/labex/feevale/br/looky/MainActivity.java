@@ -93,7 +93,7 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
 
         //new LoadProfileService(MainActivity.this).execute(1L);
         //Login
-        if(new SharedPreferencesUtils().getUSer(this).getId() == null) {
+        if(new SharedPreferencesUtils().getUSer(this) == null) {
             changeFragment(new LoginFragment(this));
         }
 

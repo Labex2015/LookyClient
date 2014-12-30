@@ -26,16 +26,21 @@ public class RequestHelpDialogActions implements DialogActions {
 
     @Override
     public void cancelAction() {
-        responseHelp = new ResponseHelp();
-        responseHelp.user = userTo;
-        responseHelp.status = false;
-        responseHelp.message = "O usuário "+userTo.getUserName()+" não pode lhe ajudar no momento.";
-        new ResponseHelpTask("Notificando usuário.", activity, responseHelp).execute();
+       assemblyNotification("O usuário "+userTo.getUserName()+" não pode lhe ajudar no momento.", false);
     }
 
     @Override
     public void confirmAction() {
          User me = new SharedPreferencesUtils().getUSer(activity);
-        ((MainActivity)activity).changeFragment(new ChatFragment(activity, me.getId(), userTo.getId()));
+         assemblyNotification("O usuário "+userTo.getUserName()+" aceitou lhe ajudar!", true);
+         ((MainActivity)activity).changeFragment(new ChatFragment(activity, me.getId(), userTo.getId()));
+    }
+
+    private void assemblyNotification(String message, Boolean status){
+        responseHelp = new ResponseHelp();
+        responseHelp.user = userTo;
+        responseHelp.status = status;
+        responseHelp.message = message;
+        new ResponseHelpTask("Notificando usuário.", activity, responseHelp).execute();
     }
 }

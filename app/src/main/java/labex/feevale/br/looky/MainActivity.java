@@ -26,12 +26,14 @@ import labex.feevale.br.looky.model.RequestHelp;
 import labex.feevale.br.looky.service.CancelHelpService;
 import labex.feevale.br.looky.service.GCMService;
 import labex.feevale.br.looky.service.utils.GCMVariables;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.view.adapter.DrawerAdapter;
 import labex.feevale.br.looky.view.adapter.DrawerHandler;
 import labex.feevale.br.looky.view.adapter.ItemAdapter;
 import labex.feevale.br.looky.view.dialogs.DialogMaker;
 import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
+import labex.feevale.br.looky.view.fragment.LoginFragment;
 import labex.feevale.br.looky.wrapper.Request;
 
 import static labex.feevale.br.looky.R.id.drawer_layout;
@@ -89,14 +91,16 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         //changeFragment(new ChatFragment(this));
 
         //new LoadProfileService(MainActivity.this).execute(1L);
+        //Login
+        if(new SharedPreferencesUtils().getUSer(this).getId() != null) {
+            changeFragment(new LoginFragment(this));
+        }
+
         Intent intent = getIntent();
         Bundle params = intent.getBundleExtra("TYPE_FRAG");
         if(params != null) {
-            /*Log.e("BUNDLE",getIntent().getExtras().containsKey("TYPE_FRAG")+"");
-            Log.e("BUNDLE",params.containsKey("ITEM_TO_LOAD")+"");
-            Log.e("BUNDLE",params.containsKey("REQUEST")+"");
-            int getFromNotification = intent.getBundleExtra("TYPE_FRAG").getInt(GCMVariables.ITEM_TO_LOAD);*/
-            if(params.containsKey("CHAT")) {
+
+         if(params.containsKey("CHAT")) {
                 ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
                 changeFragment(new ChatFragment(this, chatResponse));
             }else if(params.containsKey("REQUEST")){
@@ -109,6 +113,8 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
 
             }
         }
+
+
     }
 
     @Override
@@ -144,15 +150,16 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         this.mFragment = fragment;
+        if(mFragment instanceof LoginFragment)
+            getActionBar().hide();
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-       /* int id = item.getItemId();
+       /**
+        TODO encerrar pedido de ajuda
+        int id = item.getItemId();
         switch (id){
             case action_settings:
                 break;

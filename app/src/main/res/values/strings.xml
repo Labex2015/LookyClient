@@ -49,4 +49,11 @@
     <!-- Request Help -->
     <string name="request_help_label_page">Digite um conhecimento pelo qual você precisa de ajuda. Exemplo: JAVA.</string>
 
+    <!-- Login -->
+    <string name="HINT_EMAIL">Email </string>
+    <string name="HINT_PASSWORD">Senha </string>
+    <string name="BTN_LOGIN">LOGIN </string>
+    <string name="LINK_REGISTER">CADASTRAR </string>
+
 </resources>
+

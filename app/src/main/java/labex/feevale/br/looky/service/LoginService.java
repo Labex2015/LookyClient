@@ -24,6 +24,7 @@ public class LoginService extends ServiceHandler {
 
 
     public LoginService(Activity activity, RegisterLogin registerLogin) {
+        super(activity);
         this.activity = activity;
         this.registerLogin = registerLogin;
     }

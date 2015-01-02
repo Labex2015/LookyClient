@@ -8,4 +8,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listHelpers" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="8"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ops! Nenhuma pessoa disponível no momento..."
+        android:id="@+id/emptyListTextView"
+        android:layout_gravity="center_horizontal" />
 </FrameLayout>

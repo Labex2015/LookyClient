@@ -27,12 +27,15 @@ public class ListHelperAdapter extends BaseAdapter{
 
     Typeface tf;
 
-    public ListHelperAdapter (Context context, List<User> users, Long idKnowledge){
+    public ListHelperAdapter (Context context, List<User> users){
         this.context = context;
         this.users = users;
-        this.idKnowledge = idKnowledge;
-
         this.tf = Typeface.createFromAsset(context.getAssets(), "fonts/roboto.ttf");
+    }
+
+    public ListHelperAdapter (Context context, List<User> users, Long idKnowledge){
+        this(context, users);
+        this.idKnowledge = idKnowledge;
     }
 
     @Override

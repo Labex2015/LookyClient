@@ -23,6 +23,7 @@ public class SendDeniedRequest extends ServiceHandler {
     private MessageResponse messageResponse;
 
     public SendDeniedRequest(Activity activity, ResponseHelp responseHelp, MessageResponse messageResponse) {
+        super(activity);
         this.activity = activity;
         this.responseHelp = responseHelp;
         this.messageResponse = messageResponse;

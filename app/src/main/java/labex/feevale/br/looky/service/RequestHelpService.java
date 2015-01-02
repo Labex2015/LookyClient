@@ -1,6 +1,8 @@
 package labex.feevale.br.looky.service;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class RequestHelpService extends ServiceHandler {
     Context context;
 
     public RequestHelpService(Context context){
+        super((Activity)context);
         this.context = context;
     }
 
@@ -38,13 +41,11 @@ public class RequestHelpService extends ServiceHandler {
     @Override
     protected void postExecute(String response) {
         List<User> users = new ArrayList<User>();
-        if(!response.equals("[]")) {
+        if(!response.trim().equals("[]")) {
             users = new JsonUtils().JsonToListUsers(response);
-           ((MainActivity) context).changeFragment(new ListHelpersFragment(context, users, 1L));
-            //TODO conferir como tratar o conhecimento que esta sendo procurado
-        }else{
-            Toast.makeText(context, R.string.LIST_EMPTY_USERS_TO_HELP, Toast.LENGTH_LONG);
+            //TODO: conferir como tratar o conhecimento que esta sendo procurado
         }
+        ((MainActivity) context).changeFragment(new ListHelpersFragment(context, users));
     }
 
     @Override

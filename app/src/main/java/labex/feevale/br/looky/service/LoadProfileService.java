@@ -20,6 +20,7 @@ public class LoadProfileService extends ServiceHandler {
     Context context;
 
     public LoadProfileService(Context context) {
+        super((MainActivity)context);
         this.context = context;
     }
 

@@ -1,10 +1,12 @@
 package labex.feevale.br.looky.service.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
 import java.util.List;
 
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.view.fragment.ListKnowledgeFragment;
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
@@ -24,8 +26,9 @@ public class GetKnowledges extends ServiceHandler {
 
     Context context;
 
-    public GetKnowledges(Context c){
-        this.context = c;
+    public GetKnowledges(Context context){
+        super((Activity)context);
+        this.context = context;
     }
 
     @Override
@@ -39,8 +42,7 @@ public class GetKnowledges extends ServiceHandler {
     }
 
     public void execute(){
-        User user           = new PreferencesHelp(context).getUserToPreferences();
-        JsonUtils jsonUtils = new JsonUtils();
+        User user           = new SharedPreferencesUtils().getUSer(context);
         super.makeServiceCall(AppVariables.URL + AppVariables.USER_VERB + user.getId() + "/" + AppVariables.KNOWLEDGE_VERB, GET, null);
     }
 

@@ -17,6 +17,7 @@ public class SendMessageService extends ServiceHandler {
     private Activity activity;
 
     public SendMessageService(String message, MessageResponse messageResponse, Activity activity) {
+        super(activity);
         this.message = message;
         this.messageResponse = messageResponse;
         this.activity = activity;

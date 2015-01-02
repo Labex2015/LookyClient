@@ -1,30 +1,37 @@
-package labex.feevale.br.looky.service.utils;
+package labex.feevale.br.looky.service;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import java.util.List;
 
+import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.service.ServiceHandler;
+import labex.feevale.br.looky.service.utils.ProcessMessage;
 import labex.feevale.br.looky.utils.AppHelp;
 import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
+import labex.feevale.br.looky.utils.MessageResponse;
 import labex.feevale.br.looky.utils.PreferencesHelp;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**
- * Created by Vitor on 16/12/2014.
+ * Created by 0139612 on 17/12/2014.
  */
-public class AddKnowledge extends ServiceHandler {
+public class RemoveKnowledge extends ServiceHandler implements ProcessMessage {
+
     Context context;
     private Knowledge knowledge;
+    private MessageResponse messageResponse;
     private List<Knowledge> knowledges;
+    private BaseAdapter baseAdapter;
 
-    public AddKnowledge(Context context, Knowledge knowledge, List<Knowledge> knowledges){
+    public RemoveKnowledge(Context context, Knowledge knowledge, List<Knowledge> knowledges){
         super((Activity)context);
         this.knowledge = knowledge;
         this.context = context;
@@ -45,21 +52,33 @@ public class AddKnowledge extends ServiceHandler {
         User user           = new SharedPreferencesUtils().getUSer(context);
         JsonUtils jsonUtils = new JsonUtils();
         super.makeServiceCall(AppVariables.URL
-                            + AppVariables.USER_VERB
-                            + user.getId() + "/knowledge/", POST, jsonUtils.KnowledgeToJson(knowledge));
+                + AppVariables.USER_VERB
+                + user.getId() + "/knowledge/remove/"
+                + knowledge.getArea().getId(),
+                POST, null);
     }
 
     @Override
     protected void postExecute(String response) {
-        JsonUtils jsonUtils = new JsonUtils();
-        Knowledge knowledge = jsonUtils.JsonToKnowledge(response);
-
-        if(knowledge != null){
-            Toast.makeText(context, context.getResources().getString(R.string.SUCCESS), Toast.LENGTH_LONG).show();
-            knowledges.add(knowledge);
-        } else {
-            Toast.makeText(context, context.getResources().getString(R.string.OPERATION_FAIL), Toast.LENGTH_LONG).show();
+        messageResponse = new JsonUtils().JsonToMessageResponse(response);
+        if(messageResponse.getStatus()) {
+            knowledges.remove(knowledge);
+            ((MainActivity)context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    baseAdapter.notifyDataSetChanged();
+                }
+            });
         }
     }
-}
 
+    @Override
+    public MessageResponse getResponse() {
+        return messageResponse;
+    }
+
+    @Override
+    public void notifyAdapterChanged(BaseAdapter adapter) {
+        this.baseAdapter = adapter;
+    }
+}

@@ -29,6 +29,11 @@ public class ListHelpersFragment extends Fragment {
     ListView listHelpers;
     Long idKnowledgeFind;
 
+    public ListHelpersFragment(Context context, List<User> userList) {
+        this.context = context;
+        this.userList = userList;
+    }
+
     public ListHelpersFragment(Context context, List<User> userList, Long idKnowledgeFind) {
         this.context = context;
         this.userList = userList;
@@ -43,8 +48,9 @@ public class ListHelpersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_list_helpers, container, false);
-
         listHelpers = (ListView) view.findViewById(R.id.listHelpers);
+        listHelpers.setEmptyView(view.findViewById(R.id.emptyListTextView));
+
         listHelpers.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -58,7 +64,7 @@ public class ListHelpersFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        listHelpers.setAdapter((new ListHelperAdapter(getActivity(),userList, idKnowledgeFind)));
+        listHelpers.setAdapter((new ListHelperAdapter(getActivity(),userList)));
     }
 }
 

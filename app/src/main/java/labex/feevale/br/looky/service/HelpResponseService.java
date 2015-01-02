@@ -21,6 +21,7 @@ public class HelpResponseService extends ServiceHandler {
     private MessageResponse messageResponse;
 
     public HelpResponseService(Activity activity, ResponseHelp responseHelp, MessageResponse messageResponse) {
+        super(activity);
         this.activity = activity;
         this.responseHelp = responseHelp;
         this.messageResponse = messageResponse;

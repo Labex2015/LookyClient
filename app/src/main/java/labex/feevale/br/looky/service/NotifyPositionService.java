@@ -1,5 +1,6 @@
 package labex.feevale.br.looky.service;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -18,6 +19,7 @@ public class NotifyPositionService extends ServiceHandler {
     Context context;
 
     public NotifyPositionService(Context context) {
+        super((Activity)context);
         this.context = context;
     }
 

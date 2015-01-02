@@ -1,5 +1,6 @@
 package labex.feevale.br.looky.service;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class CancelHelpService extends ServiceHandler {
     Context context;
 
     public CancelHelpService(Context context) {
+        super((Activity)context);
         this.context = context;
     }
 

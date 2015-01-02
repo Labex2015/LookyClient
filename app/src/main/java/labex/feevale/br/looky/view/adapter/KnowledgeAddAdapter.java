@@ -14,7 +14,7 @@ import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.service.utils.KnowledgesTask;
-import labex.feevale.br.looky.service.utils.RemoveKnowledge;
+import labex.feevale.br.looky.service.RemoveKnowledge;
 
 /**
  * Created by 0139612 on 16/12/2014.

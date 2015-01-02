@@ -2,6 +2,7 @@ package labex.feevale.br.looky.service;
 
 import android.app.Activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import labex.feevale.br.looky.utils.AppHelp;
@@ -19,6 +20,7 @@ public class ListAreasNameService extends ServiceHandler {
     private MessageResponse messageResponse;
 
     public ListAreasNameService(Activity activity, List<String> names, MessageResponse messageResponse) {
+        super(activity);
         this.activity = activity;
         this.names = names;
         this.messageResponse = messageResponse;
@@ -37,8 +39,14 @@ public class ListAreasNameService extends ServiceHandler {
 
     @Override
     protected void postExecute(String response) {
-        names.addAll(new JsonUtils().jsonStringList(response));
-        messageResponse.setStatus(true);
+        List<String> responseNames = new JsonUtils(new ArrayList<String>()).jsonStringList(response);
+        if(response != null) {
+            names.addAll(responseNames);
+            messageResponse.setStatus(true);
+        }else {
+            messageResponse.setMsg("Problemas ao processar consulta ao servidor.");
+            messageResponse.setStatus(false);
+        }
     }
 
     @Override

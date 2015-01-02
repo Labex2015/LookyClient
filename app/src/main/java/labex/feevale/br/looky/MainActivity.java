@@ -34,6 +34,7 @@ import labex.feevale.br.looky.view.dialogs.DialogMaker;
 import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
 import labex.feevale.br.looky.view.fragment.LoginFragment;
+import labex.feevale.br.looky.view.fragment.MainFragment;
 import labex.feevale.br.looky.view.fragment.RegisterFragment;
 import labex.feevale.br.looky.wrapper.Request;
 
@@ -53,6 +54,7 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
     protected ListView drawerListView;
     protected List<ItemAdapter> itemsAdapter;
 
+    public static int pass = 0;
     public MainActivity() {
         itemsAdapter = Arrays.asList(ItemAdapter.HELPERS, ItemAdapter.KNOWLEDGES, ItemAdapter.PROFILE,
                 ItemAdapter.REQUESTS);
@@ -87,55 +89,36 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         /*mService = new Intent(this, GetPositionService.class);
         startService(mService);*/
 
-        //new GetKnowledges(this).execute();
-        //new GCMService(this).execute();
-        //changeFragment(new ChatFragment(this));
-
-        //new LoadProfileService(MainActivity.this).execute(1L);
         //Login
         if(new SharedPreferencesUtils().getUSer(this) == null) {
             changeFragment(new LoginFragment(this));
-        }
+        }else {
 
-        Intent intent = getIntent();
-        Bundle params = intent.getBundleExtra("TYPE_FRAG");
-        if(params != null) {
+            Intent intent = getIntent();
+            Bundle params = intent.getBundleExtra("TYPE_FRAG");
+            if (params != null) {
 
-         if(params.containsKey("CHAT")) {
-                ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
-                changeFragment(new ChatFragment(this, chatResponse));
-            }else if(params.containsKey("REQUEST")){
-                RequestHelp requestHelp = (RequestHelp)params.getSerializable("REQUEST");
-                if(requestHelp != null){
-                    RequestHelpDialogActions actions = new RequestHelpDialogActions(requestHelp.getUser(), this);
-                    new DialogMaker("Solicitação de ajuda", requestHelp.getText(), actions).createDialog(this).show();
+                if (params.containsKey("CHAT")) {
+                    ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
+                    params.remove("CHAT");
+                    changeFragment(new ChatFragment(this, chatResponse));
+                } else if (params.containsKey("REQUEST")) {
+                    RequestHelp requestHelp = (RequestHelp) params.getSerializable("REQUEST");
+                    if (requestHelp != null) {
+                        RequestHelpDialogActions actions = new RequestHelpDialogActions(requestHelp.getUser(), this);
+                        new DialogMaker("Solicitação de ajuda", requestHelp.getText(), actions).createDialog(this).show();
+                    }
                 }
-
-
+            } else {
+                loadMainFragment();
             }
         }
-
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        //verifica se uma notificação chamou o app
-        Intent intent = getIntent();
-        Bundle params = intent.getExtras();
-
-        /*if(params!=null)
-            switch (intent.getExtras().getInt(AppVariables.EXTRA_NOTIFICATION)){
-
-                case AppVariables.OPEN_FRAGMENT_CHAT:
-                    break;
-
-                default:
-                    break;
-
-        }*/
     }
 
     /**
@@ -238,6 +221,10 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
     @Override
     public void executeActionDrawer() {
         drawerLayout.closeDrawer(drawerListView);
+    }
+
+    public void loadMainFragment(){
+        changeFragment(new MainFragment());
     }
 }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.widget.Toast;
 
+import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.ResponseHelp;
 import labex.feevale.br.looky.model.User;
@@ -12,6 +13,7 @@ import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
+import labex.feevale.br.looky.view.fragment.MainFragment;
 import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**
@@ -24,6 +26,7 @@ public class RegisterService extends ServiceHandler {
     private RegisterLogin registerLogin;
 
     public RegisterService(Activity activity, RegisterLogin registerLogin) {
+        super(activity);
         this.activity = activity;
         this.registerLogin = registerLogin;
     }
@@ -48,10 +51,12 @@ public class RegisterService extends ServiceHandler {
         closeDialog();
 
         if(userResponse.getId() != null){
-            //TODO ir para tela principal
-            //((MainActivity) context).changeFragment(new );
             SharedPreferencesUtils sharedPreferencesUtils = new SharedPreferencesUtils();
             sharedPreferencesUtils.saveUser(activity,userResponse);
+            if(sharedPreferencesUtils.getUSer(activity).getId() > 0)
+                ((MainActivity)activity).loadMainFragment();
+            else
+                Toast.makeText(activity, "Problemas ao efetuar seu registro!", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(activity,activity.getResources().getString(R.string.OPERATION_FAIL),Toast.LENGTH_SHORT).show();
         }

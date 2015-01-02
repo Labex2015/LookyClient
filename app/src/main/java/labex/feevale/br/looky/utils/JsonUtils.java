@@ -20,8 +20,43 @@ import labex.feevale.br.looky.wrapper.RegisterLogin;
 /**
  * Created by 0118230 on 12/12/2014.
  */
-public class JsonUtils {
+public class JsonUtils<T>{
     private Gson mGson;
+    private T entity;
+
+
+    public JsonUtils() {
+    }
+
+    public JsonUtils(T entity) {
+        this.entity = entity;
+    }
+
+    private void postExecute(){
+        mGson = new GsonBuilder().registerTypeAdapter(Boolean.class, new GsonBoolean()).serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+    }
+
+    private void preExecute(){
+        mGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").serializeNulls().create();
+    }
+
+    private Object process(String response){
+        postExecute();
+        try{
+            return mGson.fromJson(response, entity.getClass());
+        }catch (Exception e){
+            return entity;
+        }
+    }
+
+    private String process(T toProcess){
+        preExecute();
+        try{
+            return mGson.toJson(toProcess);
+        }catch (Exception e){
+            return "";
+        }
+    }
 
     public HelpWrapper JsonToRequest(String response){
         postExecute();
@@ -55,17 +90,15 @@ public class JsonUtils {
 
     public MessageResponse JsonToMessageResponse(String response){
         postExecute();
-        return mGson.fromJson(response, MessageResponse.class);
+        MessageResponse messageResponse = mGson.fromJson(response, MessageResponse.class);
+        if(messageResponse != null)
+            return messageResponse;
+
+        return new MessageResponse("Problemas ao consultar servidor!", false);
     }
 
 
-    private void postExecute(){
-        mGson = new GsonBuilder().registerTypeAdapter(Boolean.class, new GsonBoolean()).serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-    }
 
-    private void preExecute(){
-        mGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").serializeNulls().create();
-    }
 
     public List<User> JsonToListUsers(String response){
         postExecute();
@@ -112,14 +145,17 @@ public class JsonUtils {
     }
 
     public List<String> jsonStringList(String response){
-        postExecute();
-        return mGson.fromJson(response, new TypeToken<List<String>>() {
-        }.getType());
+        return (List<String>)process(response);
     }
 
     public RequestHelp JsonToRequestHelp(String response){
         postExecute();
         return mGson.fromJson(response, RequestHelp.class);
+    }
+
+    public String MessageToJson(MessageResponse response){
+        preExecute();
+        return mGson.toJson(response);
     }
 
 }

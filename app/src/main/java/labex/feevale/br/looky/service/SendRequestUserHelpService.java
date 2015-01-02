@@ -20,6 +20,7 @@ public class SendRequestUserHelpService extends ServiceHandler {
     private ProgressDialog dialog;
 
     public SendRequestUserHelpService(Activity activity, Long idUserToRequest) {
+        super(activity);
         this.activity = activity;
         this.idUserToRequest = idUserToRequest;
     }

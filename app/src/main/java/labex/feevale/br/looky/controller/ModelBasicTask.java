@@ -36,7 +36,7 @@ public abstract class ModelBasicTask extends AsyncTask<Void, MessageResponse, Me
             if(progressDialog.isShowing())
                 progressDialog.dismiss();
 
-            if(messageResponse.getStatus())
+            if(messageResponse != null && messageResponse.getStatus())
                 onSuccess();
             else
                 onFail();

@@ -13,10 +13,12 @@ import labex.feevale.br.looky.utils.MessageResponse;
 public class ResponseHelpTask extends ModelBasicTask {
 
     private ResponseHelp responseHelp;
+    private MessageResponse messageResponse;
 
     public ResponseHelpTask(String messageDialog, Activity activity, ResponseHelp responseHelp){
         super(messageDialog, activity);
         this.responseHelp = responseHelp;
+        this.messageResponse = new MessageResponse("", true);
     }
 
     @Override

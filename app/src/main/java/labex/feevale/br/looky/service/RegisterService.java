@@ -25,18 +25,15 @@ public class RegisterService extends ServiceHandler {
     private ProgressDialog dialog;
     private RegisterLogin registerLogin;
 
-    public RegisterService(Activity activity, RegisterLogin registerLogin) {
+    public RegisterService(Activity activity, RegisterLogin registerLogin, ProgressDialog dialog) {
         super(activity);
+        this.dialog = dialog;
         this.activity = activity;
         this.registerLogin = registerLogin;
     }
 
     @Override
     public boolean validation() {
-        dialog = new ProgressDialog(activity);
-        dialog.setMessage(activity.getResources().getString(R.string.LOADING));
-        dialog.setCancelable(false);
-        dialog.show();
         return new AppHelp(activity).validateConnection();
     }
 

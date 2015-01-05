@@ -3,6 +3,7 @@ package labex.feevale.br.looky.service;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import labex.feevale.br.looky.MainActivity;
@@ -25,18 +26,15 @@ public class LoginService extends ServiceHandler {
     private RegisterLogin registerLogin;
 
 
-    public LoginService(Activity activity, RegisterLogin registerLogin) {
+    public LoginService(Activity activity, RegisterLogin registerLogin, ProgressDialog dialog) {
         super(activity);
+        this.dialog = dialog;
         this.activity = activity;
         this.registerLogin = registerLogin;
     }
 
     @Override
     public boolean validation() {
-        dialog = new ProgressDialog(activity);
-        dialog.setMessage(activity.getResources().getString(R.string.LOADING));
-        dialog.setCancelable(false);
-        dialog.show();
         return new AppHelp(activity).validateConnection();
     }
 

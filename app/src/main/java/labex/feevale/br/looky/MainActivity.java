@@ -107,12 +107,6 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
                     params.clear();
                     getIntent().removeExtra("TYPE_FRAG");
 
-                    Bundle params2 = intent.getBundleExtra("TYPE_FRAG");
-                    if(params2 == null)
-                        Log.e("PIRANHA", "Mauricio omem");
-                    else
-                        Log.e("PIRANHA", "Mauricio PIRANHA");
-
                     changeFragment(new ChatFragment(this, chatResponse));
                 } else if (params.containsKey("REQUEST")) {
                     RequestHelp requestHelp = (RequestHelp) params.getSerializable("REQUEST");
@@ -157,11 +151,15 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
     public boolean onOptionsItemSelected(MenuItem item) {
         //TODO encerrar pedido de ajuda
         int id = item.getItemId();
+
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_logout:
+                logout();
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -186,6 +184,25 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void logout(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.LOGOUT)
+                .setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferencesUtils sharedPreferencesUtils = new SharedPreferencesUtils();
+                        sharedPreferencesUtils.clear(getBaseContext());
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.NO, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
@@ -234,6 +251,8 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         }else if(mFragment instanceof MainFragment){
             new DialogMaker("Sair do aplicativo?","Você quer sair do aplicativo?",
                     new CloseAppAction(this)).createDialog(this).show();
+        }else if (mFragment instanceof RegisterFragment){
+            changeFragment(new LoginFragment(this));
         }else{
             changeFragment(new MainFragment());
         }

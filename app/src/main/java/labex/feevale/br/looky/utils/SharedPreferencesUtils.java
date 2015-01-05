@@ -61,4 +61,9 @@ public class SharedPreferencesUtils {
            return null;
         }
     }
+
+    public void clear(Context context){
+        SharedPreferences.Editor editor = returnMySharedPref(context).edit();
+        editor.clear();
+    }
 }

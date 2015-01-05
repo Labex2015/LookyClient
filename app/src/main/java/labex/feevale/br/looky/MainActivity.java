@@ -251,15 +251,20 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
 
     @Override
     public void onBackPressed() {
-        if(mFragment instanceof ChatFragment){
-
-        }else if(mFragment instanceof MainFragment){
-            new DialogMaker("Sair do aplicativo?","Você quer sair do aplicativo?",
-                    new CloseAppAction(this)).createDialog(this).show();
-        }else if (mFragment instanceof RegisterFragment){
+        if(new SharedPreferencesUtils().getUSer(this) == null ||
+                new SharedPreferencesUtils().getUSer(this).getId() == 0) {
             changeFragment(new LoginFragment(this));
         }else{
-            changeFragment(new MainFragment());
+            if (mFragment instanceof ChatFragment) {
+
+            } else if (mFragment instanceof MainFragment) {
+                new DialogMaker("Sair do aplicativo?", "Você quer sair do aplicativo?",
+                        new CloseAppAction(this)).createDialog(this).show();
+            } else if (mFragment instanceof RegisterFragment) {
+                changeFragment(new LoginFragment(this));
+            } else {
+                changeFragment(new MainFragment());
+            }
         }
     }
 }

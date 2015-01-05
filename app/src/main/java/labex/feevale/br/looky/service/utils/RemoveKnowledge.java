@@ -1,5 +1,6 @@
 package labex.feevale.br.looky.service.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class RemoveKnowledge extends ServiceHandler implements ProcessMessage {
     private BaseAdapter baseAdapter;
 
     public RemoveKnowledge(Context context, Knowledge knowledge, List<Knowledge> knowledges){
+        super((Activity)context);
         this.knowledge = knowledge;
         this.context = context;
         this.knowledges = knowledges;

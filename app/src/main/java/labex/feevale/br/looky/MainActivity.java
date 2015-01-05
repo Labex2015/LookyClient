@@ -191,6 +191,7 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         builder.setMessage(R.string.LOGOUT)
                 .setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         SharedPreferencesUtils sharedPreferencesUtils = new SharedPreferencesUtils();
                         sharedPreferencesUtils.clear(getBaseContext());
                         finish();

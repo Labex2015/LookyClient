@@ -14,7 +14,7 @@
     <string name="YES">SIM</string>
     <string name="NO">NÃO</string>
     <string name="NEW_KNOWLEDGE_TITLE">Novo conhecimento</string>
-    <string name="LOGOUT">Logout</string>
+    <string name="LOGOUT">Deseja fazer Logout?</string>
     <string name="LOADING">Aguarde...</string>
 
     <!--NOTIFICATIONS-->

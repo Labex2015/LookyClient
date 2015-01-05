@@ -21,6 +21,7 @@ public class LoadRequestHelpFragment extends ModelBasicTask {
 
     public LoadRequestHelpFragment(String messageDialog, Activity activity) {
         super(messageDialog, activity);
+        messageResponse = new MessageResponse("", false);
     }
 
     @Override

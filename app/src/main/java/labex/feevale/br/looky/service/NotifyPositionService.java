@@ -11,15 +11,16 @@ import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
 import labex.feevale.br.looky.utils.PreferencesHelp;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**
  * Created by Jeferson on 11/12/2014.
  */
-public class NotifyPositionService extends ServiceHandler {
+public class NotifyPositionService extends BaseServiceHandler {
     Context context;
 
     public NotifyPositionService(Context context) {
-        super((Activity)context);
+        super(context);
         this.context = context;
     }
 
@@ -46,9 +47,10 @@ public class NotifyPositionService extends ServiceHandler {
     }
 
     public void execute(){
-        User user           = new PreferencesHelp(context).getUserToPreferences();
-        JsonUtils jsonUtils = new JsonUtils();
-
-        super.makeServiceCall(AppVariables.URL + AppVariables.POSITION_VERB,POST, jsonUtils.UserToJson(user));
+        User user           = new SharedPreferencesUtils().getUSer(context);
+        if(user != null) {
+            JsonUtils jsonUtils = new JsonUtils();
+            super.makeServiceCall(AppVariables.URL + AppVariables.POSITION_VERB, POST, jsonUtils.UserToJson(user));
+        }
     }
 }

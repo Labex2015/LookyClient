@@ -6,7 +6,9 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.utils.PreferencesHelp;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 
 public class LocationService implements  LocationListener{
@@ -19,13 +21,15 @@ public class LocationService implements  LocationListener{
 
     @Override
     public void onLocationChanged(Location location) {
-        PreferencesHelp preferencesHelp = new PreferencesHelp(context);
-        preferencesHelp.SetPositionUser(location.getLatitude(),location.getLongitude());
-
-        NotifyPositionService notifyPositionService = new NotifyPositionService(context);
-        notifyPositionService.execute();
-
-        Toast.makeText(context,"notificou",Toast.LENGTH_LONG).show();
+        SharedPreferencesUtils preferencesUtils = new SharedPreferencesUtils();
+        User user = preferencesUtils.getUSer(context);
+        if(user != null) {
+            user.setLatitude(location.getLatitude());
+            user.setLongitude(location.getLongitude());
+            preferencesUtils.saveUser(context, user);
+            NotifyPositionService notifyPositionService = new NotifyPositionService(context);
+            notifyPositionService.execute();
+        }
     }
 
     @Override

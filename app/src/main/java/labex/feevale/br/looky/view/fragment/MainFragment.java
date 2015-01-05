@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.controller.LoadRequestHelpFragment;
-import labex.feevale.br.looky.service.LoadProfileService;
-import labex.feevale.br.looky.service.utils.GetKnowledges;
-import labex.feevale.br.looky.utils.SharedPreferencesUtils;
+import labex.feevale.br.looky.service.GetKnowledges;
 
 /**
  * Created by PabloGilvan on 01/01/2015.

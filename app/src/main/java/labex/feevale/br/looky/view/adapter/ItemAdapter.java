@@ -7,19 +7,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import labex.feevale.br.looky.controller.LoadRequestHelpFragment;
 import labex.feevale.br.looky.view.fragment.ListHelpersFragment;
-import labex.feevale.br.looky.view.fragment.RequestHelpFragment;
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Area;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.service.LoadProfileService;
-import labex.feevale.br.looky.service.utils.GetKnowledges;
+import labex.feevale.br.looky.service.GetKnowledges;
 
 /**
  * Created by Vitor/Thaiane on 18/12/2014.

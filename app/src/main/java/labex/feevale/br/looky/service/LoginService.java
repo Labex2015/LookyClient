@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.Toast;
 
+import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.utils.AppHelp;
@@ -12,6 +13,7 @@ import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
+import labex.feevale.br.looky.view.fragment.MainFragment;
 import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**
@@ -49,8 +51,7 @@ public class LoginService extends ServiceHandler {
         closeDialog();
 
         if(userResponse.getId() != null){
-            //TODO ir para tela principal
-            //((MainActivity) context).changeFragment(new );
+            ((MainActivity)activity).changeFragment(new MainFragment());
             SharedPreferencesUtils sharedPreferencesUtils = new SharedPreferencesUtils();
             sharedPreferencesUtils.saveUser(activity,userResponse);
         }else{

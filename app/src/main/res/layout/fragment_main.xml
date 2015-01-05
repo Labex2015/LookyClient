@@ -25,14 +25,14 @@
             android:layout_height="100dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/users"
+            android:background="@drawable/knowledge"
             android:id="@+id/menuPrincipalProfile"/>
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/group"
+            android:background="@drawable/interation"
             android:id="@+id/menuPrincipalChat"/>
     </LinearLayout>
 

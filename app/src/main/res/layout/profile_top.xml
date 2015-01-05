@@ -54,6 +54,7 @@
         android:layout_marginRight="10dp"
         android:padding="0dp"
         android:textSize="10pt"
+        android:lines="1"
         android:textColor="@color/light_gray_fonts_app"/>
 
 </RelativeLayout>

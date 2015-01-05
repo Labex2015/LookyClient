@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -46,35 +47,39 @@ public class GCMService extends AsyncTask<Void, String,String>{
 
     @Override
     protected String doInBackground(Void... voids) {
-
         String msg = "";
-        String regid = "";
+        String registerId = "";
         try {
             if (gcm == null) {
                 gcm = GoogleCloudMessaging.getInstance(activity.getApplicationContext());
             }
-            regid = gcm.register(GCMVariables.PROJECT_NUMBER);
-            msg = regid;
+            registerId = gcm.register(GCMVariables.PROJECT_NUMBER);
+            msg = registerId;
             Log.i("GCM", msg);
-
         } catch (IOException ex) {
-            msg = "Error :" + ex.getMessage();
-            dialog.dismiss();
-
+            Log.e("Error", ex.getMessage());
+            registerId = "";
         }
-        return msg;
+        return registerId;
     }
 
     @Override
     protected void onPostExecute(String s) {
-        registerLogin.setUserKey(s);
-        switch (operation){
-            case LOGIN:
-                new LoginService(activity,registerLogin, dialog).execute();
-                break;
-            case REGISTER:
-                new RegisterService(activity,registerLogin, dialog).execute();
-                break;
+        if(2 == 2){ //TODO: s != null && s.length() != 0
+            registerLogin.setUserKey(s);
+            switch (operation){
+                case LOGIN:
+                    new LoginService(activity,registerLogin, dialog).execute();
+                    break;
+                case REGISTER:
+                    new RegisterService(activity,registerLogin, dialog).execute();
+                    break;
+            }
+        }else{
+            if(dialog.isShowing())
+                dialog.dismiss();
+            Toast.makeText(activity, "Problemas ao gerar GCM, " +
+                    "verifique sua conexão com a internet!", Toast.LENGTH_LONG).show();
         }
     }
 }

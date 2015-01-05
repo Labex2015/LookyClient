@@ -21,6 +21,7 @@ import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.service.SendRequestUserHelpService;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.view.adapter.KnowledgeAdapter;
 import labex.feevale.br.looky.view.dialogs.DialogActions;
 import labex.feevale.br.looky.view.dialogs.DialogMaker;
@@ -40,6 +41,7 @@ public class ProfileUserFragment extends Fragment implements DialogActions{
     private ListView listVKnowledges;
     private ImageButton requestHelpButton;
     private DialogActions actions;
+
     public ProfileUserFragment(Context context, User user, double distance) {
         this.context = context;
         this.user = user;
@@ -47,6 +49,14 @@ public class ProfileUserFragment extends Fragment implements DialogActions{
         this.knowledgeList = user.getKnowledgeList();
         this.actions = this;
     }
+
+    public ProfileUserFragment(Context context, User user) {
+        this.context = context;
+        this.user = user;
+        this.knowledgeList = user.getKnowledgeList();
+        this.actions = this;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,12 +87,7 @@ public class ProfileUserFragment extends Fragment implements DialogActions{
         super.onViewCreated(view, savedInstanceState);
         listVKnowledges.setAdapter(new KnowledgeAdapter(knowledgeList, context));
         textName.setText(user.getUserName());
-
-        double value = distance * 1000;
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
-
-        textDistance.setText("A " + bd.doubleValue() + " metros de você");
+        textDistance.setText(user.getDistance(new SharedPreferencesUtils().getUSer(context)));
     }
 
     private View.OnClickListener showImage() {

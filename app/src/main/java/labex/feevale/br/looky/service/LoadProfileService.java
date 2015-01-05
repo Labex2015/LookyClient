@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.view.fragment.ProfileUserFragment;
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
@@ -38,16 +39,12 @@ public class LoadProfileService extends ServiceHandler {
     protected void postExecute(String response) {
 
         User userHelper;
-        User user = new PreferencesHelp(context).getUserToPreferences();
         JsonUtils jsonUtils = new JsonUtils();
         userHelper = jsonUtils.JsonToUser(response);
-
-
-        if(userHelper != null){
-            ((MainActivity) context).changeFragment(new ProfileUserFragment(context, userHelper, user.getDistance(userHelper.getLatitude(),userHelper.getLongitude(),'K')));
-        }else{
+        if(userHelper != null)
+            ((MainActivity) context).changeFragment(new ProfileUserFragment(context, userHelper));
+        else
             Toast.makeText(context, context.getResources().getText(R.string.OPERATION_FAIL),Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override

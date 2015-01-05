@@ -3,6 +3,7 @@ package labex.feevale.br.looky.model;
 import com.google.gson.annotations.Expose;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,6 +129,17 @@ public class User implements Serializable{
         return distance(lati, longi, latitude, longitude, result);
     }
 
+    public String getDistance(User userToCompare){
+        Double dist = distance(userToCompare.getLatitude(), userToCompare.getLongitude(), latitude, longitude, 'K') * 1000;
+        Integer distInt = dist.intValue();
+        if(dist > 999){
+            int kms = distInt / 1000;
+            return "Está a "+kms+" quilômetro"+(kms == 1 ? " " : "s ")+"de você";
+        }else if(dist < 10)
+            return "Está próximo de você!";
+        else
+            return "Está a "+dist+" metro"+(dist == 1 ? "" : "s ")+"de você!";
+    }
     /**
      * Created by Vitor/Thaiane on 09/12/2014.
      * ticket 1.4

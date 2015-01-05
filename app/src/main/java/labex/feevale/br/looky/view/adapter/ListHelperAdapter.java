@@ -13,6 +13,7 @@ import java.util.List;
 
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.User;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**
  * Created by Jeferson on 09/12/2014.
@@ -22,7 +23,7 @@ public class ListHelperAdapter extends BaseAdapter{
     private List<User> users;
     private Context context;
     private Long idKnowledge;
-
+    private User userApp;
     private TextView mName, mKnowledge, mLevel, labelPage, textDistance;
 
     Typeface tf;
@@ -30,6 +31,7 @@ public class ListHelperAdapter extends BaseAdapter{
     public ListHelperAdapter (Context context, List<User> users){
         this.context = context;
         this.users = users;
+        this.userApp = new SharedPreferencesUtils().getUSer(context);
         this.tf = Typeface.createFromAsset(context.getAssets(), "fonts/roboto.ttf");
     }
 
@@ -68,7 +70,7 @@ public class ListHelperAdapter extends BaseAdapter{
         mLevel          = (TextView) view.findViewById(R.id.textLevel);
         mLevel.setTypeface(tf);
         textDistance    = (TextView) view.findViewById(R.id.text_distance);
-        textDistance.setText(R.string.list_helpers_text_distance);
+        textDistance.setText(user.getDistance(userApp));
         textDistance.setTypeface(tf);
         ImageView mImgUser = (ImageView) view.findViewById(R.id.imageUser);
 

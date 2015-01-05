@@ -46,7 +46,8 @@
 
     <!-- List Helpers -->
     <string name="list_helpers_label_page">Pessoas que podem lhe ajudar:</string>
-    <string name="list_helpers_text_distance">Está a 50 metros de você.</string>
+    <string name="list_helpers_text_distance_1">Está a </string>
+    <string name="list_helpers_text_distance_2"> metros de você.</string>
 
     <!-- Request Help -->
     <string name="request_help_label_page">Digite um conhecimento pelo qual você precisa de ajuda. Exemplo: JAVA.</string>

@@ -1,9 +1,12 @@
 package labex.feevale.br.looky;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -12,11 +15,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,13 +37,12 @@ import labex.feevale.br.looky.view.dialogs.CloseAppAction;
 import labex.feevale.br.looky.view.dialogs.DialogMaker;
 import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
-import labex.feevale.br.looky.view.fragment.ListHelpersFragment;
 import labex.feevale.br.looky.view.fragment.LoginFragment;
 import labex.feevale.br.looky.view.fragment.MainFragment;
 import labex.feevale.br.looky.view.fragment.RegisterFragment;
-import labex.feevale.br.looky.view.fragment.RequestHelpFragment;
-import labex.feevale.br.looky.wrapper.Request;
 
+
+import static labex.feevale.br.looky.R.drawable.icon_action_bar;
 import static labex.feevale.br.looky.R.id.drawer_layout;
 import static labex.feevale.br.looky.R.id.navigation_drawer;
 
@@ -69,6 +70,8 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         this.fragment = fragment;
     }
 
+    @SuppressLint("NewApi")
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +90,7 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
                 R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setIcon(icon_action_bar);
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         //ativa serviço

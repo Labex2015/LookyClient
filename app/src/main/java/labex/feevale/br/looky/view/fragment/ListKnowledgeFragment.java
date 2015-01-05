@@ -63,7 +63,7 @@ public class ListKnowledgeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list_knowledge, container, false);
 
         lsKnlwledges = (ListView) view.findViewById(R.id.lv_knowledges);
-        btnAddKnowledge = (ImageButton) view.findViewById(R.id.ibtn_addknowledge);
+        btnAddKnowledge = (ImageButton) view.findViewById(R.id.btn_addknowledge);
         btnExcluir = (ImageButton) view.findViewById(R.id.ibtn_excluir);
 
         btnAddKnowledge.setOnClickListener( newKnowledge() );

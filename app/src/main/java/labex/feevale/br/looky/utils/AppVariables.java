@@ -5,8 +5,13 @@ package labex.feevale.br.looky.utils;
  */
 public class AppVariables {
 
+<<<<<<< HEAD
     public static final String URL = "http://192.168.213.204:8080/";
     //public static final String URL = "http://54.68.213.204:8080/";
+=======
+    //public static final String URL = "http://192.168.1.105:8080/";
+    public static final String URL = "http://54.68.213.204:8080/";
+>>>>>>> 17488bca6e1f9c8d985f111a407ccd14f649c2d2
     public static final String USER_VERB = "user/";
     public static final String POSITION_VERB = "user/position";
     public static final String REQUEST_HELP_VERB = "user/help/search";

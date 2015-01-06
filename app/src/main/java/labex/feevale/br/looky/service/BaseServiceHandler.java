@@ -17,8 +17,10 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import labex.feevale.br.looky.model.ServiceError;
 import labex.feevale.br.looky.service.utils.HttpGetWithEntity;
 import labex.feevale.br.looky.utils.AppVariables;
+import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
 
 /**
@@ -42,7 +44,7 @@ public abstract class BaseServiceHandler {
     }
 
 
-    public void makeServiceCall(String url, int method, String params) {
+    public void makeServiceCall(String url, int method, String params){
 
         try {
             if(validation()) {
@@ -83,6 +85,13 @@ public abstract class BaseServiceHandler {
             }
         } catch (Exception e) {
             MessageResponse messageResponse = new MessageResponse("", false);
+            ServiceError serviceError;
+            try {
+                serviceError = new JsonUtils().JsonToError(response);
+                messageResponse.setMsg("Status: "+serviceError.getStatus()+ ", Message: "+serviceError.getMessage());
+            }catch (Exception ex){
+                messageResponse.setMsg("Problemas ao tentar conectar com o servidor.");
+            }
             if(e instanceof ConnectionPoolTimeoutException)
                 messageResponse.setMsg("Problemas ao tentar conectar com o servidor.");
             else
@@ -95,6 +104,6 @@ public abstract class BaseServiceHandler {
     protected void executeParameters(String params){};
 
     protected abstract void postExecute(String response);
-    public abstract void execute();
+    public abstract void execute() throws Exception;
 
 }

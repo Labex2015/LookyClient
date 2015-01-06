@@ -11,6 +11,7 @@ import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.Message;
 import labex.feevale.br.looky.model.RequestHelp;
 import labex.feevale.br.looky.model.ResponseHelp;
+import labex.feevale.br.looky.model.ServiceError;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.wrapper.HelpResponseWrapper;
 import labex.feevale.br.looky.wrapper.HelpWrapper;
@@ -158,4 +159,8 @@ public class JsonUtils<T>{
         return mGson.toJson(response);
     }
 
+    public ServiceError JsonToError(String response){
+        postExecute();
+        return mGson.fromJson(response, ServiceError.class);
+    }
 }

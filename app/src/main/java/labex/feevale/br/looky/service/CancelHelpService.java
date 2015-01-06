@@ -50,6 +50,6 @@ public class CancelHelpService extends ServiceHandler {
         User user             = new PreferencesHelp(context).getUserToPreferences();
         JsonUtils jsonUtils   = new JsonUtils();
 
-        super.makeServiceCall(AppVariables.URL + AppVariables.CANCEL_HELP, GET, jsonUtils.UserToJson(user));
+        makeServiceCall(AppVariables.URL + AppVariables.CANCEL_HELP, GET, jsonUtils.UserToJson(user));
     }
 }

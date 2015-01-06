@@ -104,6 +104,6 @@ public abstract class BaseServiceHandler {
     protected void executeParameters(String params){};
 
     protected abstract void postExecute(String response);
-    public abstract void execute() throws Exception;
+    public abstract void execute();
 
 }

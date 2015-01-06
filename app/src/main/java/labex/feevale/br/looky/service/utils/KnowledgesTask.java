@@ -33,7 +33,6 @@ public class KnowledgesTask extends AsyncTask<Void, MessageResponse, MessageResp
 
     @Override
     protected MessageResponse doInBackground(Void... params) {
-
         handler.execute();
         MessageResponse response = processMessage.getResponse();
         return response;

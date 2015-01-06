@@ -41,6 +41,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/bg_buttons"/>
+        android:background="@drawable/button_style"/>
 
 </RelativeLayout>

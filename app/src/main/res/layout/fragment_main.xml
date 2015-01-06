@@ -13,7 +13,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/search"
+                android:background="@drawable/search_button"
                 android:id="@+id/menuPrincipalSearch"/>
         </LinearLayout>
     <LinearLayout
@@ -25,14 +25,14 @@
             android:layout_height="100dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/knowledge"
+            android:background="@drawable/interaction_button"
             android:id="@+id/menuPrincipalProfile"/>
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/interation"
+            android:background="@drawable/interaction_button"
             android:id="@+id/menuPrincipalChat"/>
     </LinearLayout>
 

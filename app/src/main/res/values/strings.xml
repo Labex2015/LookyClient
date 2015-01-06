@@ -8,6 +8,8 @@
     <!--SETTINGS-->
     <string name="action_close_help">Finalizar ajuda</string>
     <string name="action_logout">Logout</string>
+    <string name="action_chat_logout">Sair</string>
+    <string name="action_to_home">Home</string>
 
     <!--DIALOGS-->
     <string name="FINALIZE_DIALOG">Deseja finalizar a ajuda?</string>

@@ -148,12 +148,13 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
             getActionBar().hide();
         else
             getActionBar().show();
+
+        this.invalidateOptionsMenu();
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //TODO encerrar pedido de ajuda
         int id = item.getItemId();
 
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
@@ -164,30 +165,15 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
                 logout();
                 break;
 
+            case R.id.action_chat_logout:
+                //TODO sair do chat
+                break;
+
+            case R.id.action_to_home:
+                changeFragment(new MainFragment());
+                break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void endHelp() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-       // builder.setTitle("Titulo");
-        builder.setMessage(getBaseContext().getResources().getString(R.string.FINALIZE_DIALOG));
-
-        builder.setPositiveButton(getBaseContext().getResources().getString(R.string.YES), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                CancelHelpService cancelHelpService = new CancelHelpService(getBaseContext());
-                cancelHelpService.execute();
-            }
-        });
-
-        builder.setNegativeButton(getBaseContext().getResources().getString(R.string.YES), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int arg1) {
-                dialogInterface.dismiss();
-            }
-        });
-
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     private void logout(){
@@ -224,7 +210,15 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        if (mFragment instanceof ChatFragment) {
+            getMenuInflater().inflate(R.menu.chat_menu, menu);
+        } else if (mFragment instanceof MainFragment) {
+            getMenuInflater().inflate(R.menu.main, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.main, menu);
+        }
+
+
         return true;
     }
 

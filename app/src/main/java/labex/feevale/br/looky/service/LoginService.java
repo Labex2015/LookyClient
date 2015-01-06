@@ -48,12 +48,12 @@ public class LoginService extends ServiceHandler {
         User userResponse = new JsonUtils().JsonToUser(response);
         closeDialog();
 
-        if(userResponse.getId() != null){
+        if(userResponse != null && userResponse.getId() != null){
             ((MainActivity)activity).changeFragment(new MainFragment());
             SharedPreferencesUtils sharedPreferencesUtils = new SharedPreferencesUtils();
             sharedPreferencesUtils.saveUser(activity,userResponse);
         }else{
-            Toast.makeText(activity,activity.getResources().getString(R.string.OPERATION_FAIL),Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity,activity.getResources().getString(R.string.LOGIN_FAIL),Toast.LENGTH_SHORT).show();
         }
     }
 

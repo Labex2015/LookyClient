@@ -60,6 +60,7 @@
     <string name="BTN_NEXT">AVANÇAR </string>
     <string name="LINK_REGISTER">CADASTRAR </string>
     <string name="HINT_NAME">Name </string>
+    <string name="LOGIN_FAIL">Dados inválidos, verifique os dados enviados.</string>
 
 </resources>
 

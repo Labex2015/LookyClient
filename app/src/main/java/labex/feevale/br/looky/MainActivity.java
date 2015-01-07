@@ -28,6 +28,7 @@ import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
 import labex.feevale.br.looky.view.fragment.LoginFragment;
 import labex.feevale.br.looky.view.fragment.MainFragment;
+import labex.feevale.br.looky.view.fragment.ProfileUserFragment;
 import labex.feevale.br.looky.view.fragment.RegisterFragment;
 
 import static labex.feevale.br.looky.R.drawable.icon_action_bar;
@@ -225,7 +226,7 @@ public class MainActivity extends FragmentActivity {
                         new CloseAppAction(this)).createDialog(this).show();
             } else if (mFragment instanceof RegisterFragment) {
                 changeFragment(new LoginFragment(this));
-            } else {
+            } else if (!(mFragment instanceof ProfileUserFragment)) {
                 changeFragment(new MainFragment());
             }
         }

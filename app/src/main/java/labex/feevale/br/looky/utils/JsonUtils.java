@@ -41,7 +41,7 @@ public class JsonUtils<T>{
         mGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").serializeNulls().create();
     }
 
-    private Object process(String response){
+    public Object process(String response){
         postExecute();
         try{
             return mGson.fromJson(response, entity.getClass());
@@ -50,7 +50,7 @@ public class JsonUtils<T>{
         }
     }
 
-    private String process(T toProcess){
+    public String process(T toProcess){
         preExecute();
         try{
             return mGson.toJson(toProcess);

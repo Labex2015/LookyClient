@@ -25,7 +25,7 @@ import labex.feevale.br.looky.utils.MessageResponse;
 /**
  * Created by PabloGilvan on 06/01/2015.
  */
-public abstract class BaseHandler<T> {
+public class BaseHandler<T> {
 
     public final static int GET = 1;
     public final static int POST = 2;
@@ -157,10 +157,8 @@ public abstract class BaseHandler<T> {
         if(serviceAction != null)
             serviceAction.finalizeAction();
 
-        finalize(entity);
+        serviceAction.finalize(entity);
     }
-
-    protected abstract void finalize(T entity);
 
 
     public Context getContext() {

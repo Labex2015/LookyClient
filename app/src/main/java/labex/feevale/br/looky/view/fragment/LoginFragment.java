@@ -2,7 +2,6 @@ package labex.feevale.br.looky.view.fragment;
 
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
-import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.service.GCMService;
-import labex.feevale.br.looky.service.LoginService;
 import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**

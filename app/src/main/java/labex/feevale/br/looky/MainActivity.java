@@ -47,16 +47,16 @@ import static labex.feevale.br.looky.R.id.drawer_layout;
 import static labex.feevale.br.looky.R.id.navigation_drawer;
 
 
-public class MainActivity extends FragmentActivity implements DrawerHandler{
+public class MainActivity extends FragmentActivity {
 
     private Fragment mFragment;
     private  Intent mService;
     private CharSequence mTitle;
     private Fragment     fragment;
 
-    protected DrawerLayout drawerLayout;
-    protected ActionBarDrawerToggle actionBarDrawerToggle;
-    protected ListView drawerListView;
+    //protected DrawerLayout drawerLayout;
+    //protected ActionBarDrawerToggle actionBarDrawerToggle;
+    //protected ListView drawerListView;
     protected List<ItemAdapter> itemsAdapter;
 
     public static int pass = 0;
@@ -82,16 +82,19 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
         setContentView(R.layout.activity_main);
 
 
-
+        //TODO descomentar quando for usar Deawer
+        /**
         drawerListView = (ListView) findViewById(navigation_drawer);
         drawerListView.setAdapter(new DrawerAdapter(this, itemsAdapter, (DrawerHandler) this));
         drawerLayout = (DrawerLayout) findViewById(drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        **/
+
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setIcon(icon_action_bar);
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         //ativa serviço
         mService = new Intent(this, GetPositionService.class);
@@ -155,22 +158,24 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
+        //TODO descomentar quando for usar Deawer
+        /**
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        switch (id){
+         **/
+
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                changeFragment(new MainFragment());
+                break;
             case R.id.action_logout:
                 logout();
                 break;
 
             case R.id.action_chat_logout:
                 //TODO sair do chat
-                break;
-
-            case R.id.action_to_home:
-                changeFragment(new MainFragment());
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -212,33 +217,11 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
     public boolean onCreateOptionsMenu(Menu menu) {
         if (mFragment instanceof ChatFragment) {
             getMenuInflater().inflate(R.menu.chat_menu, menu);
-        } else if (mFragment instanceof MainFragment) {
-            getMenuInflater().inflate(R.menu.main, menu);
         } else {
             getMenuInflater().inflate(R.menu.main, menu);
         }
-
-
         return true;
     }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        actionBarDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public void executeActionDrawer() {
-        drawerLayout.closeDrawer(drawerListView);
-    }
-
     public void loadMainFragment(){
         changeFragment(new MainFragment());
     }
@@ -261,5 +244,28 @@ public class MainActivity extends FragmentActivity implements DrawerHandler{
             }
         }
     }
+
+    //TODO descomentar quando for usar Deawer
+    /**
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void executeActionDrawer() {
+        drawerLayout.closeDrawer(drawerListView);
+    }
+
+    **/
+
+
 }
 

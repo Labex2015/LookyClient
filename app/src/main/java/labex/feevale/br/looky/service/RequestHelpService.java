@@ -2,19 +2,18 @@ package labex.feevale.br.looky.service;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import labex.feevale.br.looky.view.fragment.ListHelpersFragment;
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.utils.AppHelp;
 import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
+import labex.feevale.br.looky.view.fragment.ListHelpersFragment;
 import labex.feevale.br.looky.wrapper.HelpWrapper;
 
 /**

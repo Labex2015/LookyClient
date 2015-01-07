@@ -10,12 +10,19 @@ import android.widget.ImageButton;
 
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.controller.LoadRequestHelpFragment;
-import labex.feevale.br.looky.service.GetKnowledges;
+import labex.feevale.br.looky.model.User;
+import labex.feevale.br.looky.service.BaseHandler;
+import labex.feevale.br.looky.service.utils.KnowledgesServiceAction;
+import labex.feevale.br.looky.utils.AppVariables;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
+import labex.feevale.br.looky.wrapper.KnowledgeWrapper;
 
 /**
  * Created by PabloGilvan on 01/01/2015.
  */
 public class MainFragment extends Fragment {
+
+    private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -25,24 +32,28 @@ public class MainFragment extends Fragment {
         ImageButton profileButton = (ImageButton) view.findViewById(R.id.menuPrincipalProfile);
         profileButton.setOnClickListener(loadProfileFragment());
         ImageButton chatButton = (ImageButton) view.findViewById(R.id.menuPrincipalChat);
-
+        user = new SharedPreferencesUtils().getUSer(getActivity());
         return view;
     }
 
     private View.OnClickListener loadProfileFragment() {
-          return new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  new GetKnowledges(getActivity()).execute();
-              }
-          };
+            return new View.OnClickListener() {
+                @Override
+                public void onClick (View view){
+                    if (user != null){
+                        final String url = AppVariables.URL + AppVariables.USER_VERB + user.getId() + "/" + AppVariables.KNOWLEDGE_VERB;
+                        new BaseHandler<KnowledgeWrapper>(new KnowledgeWrapper(), url, getActivity(),
+                                BaseHandler.TASK, BaseHandler.GET, new KnowledgesServiceAction(getActivity())).makeServiceCall();
+                    }
+                }
+            };
     }
 
     private View.OnClickListener loadSearchHelpFragment() {
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new LoadRequestHelpFragment("Carregando tela de ajuda!", getActivity()).execute();
+                    new LoadRequestHelpFragment(getActivity()).execute();
                 }
             };
     }

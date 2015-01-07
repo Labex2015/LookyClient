@@ -1,6 +1,7 @@
 package labex.feevale.br.looky.service.utils;
 
 import android.widget.BaseAdapter;
+
 import labex.feevale.br.looky.utils.MessageResponse;
 
 /**

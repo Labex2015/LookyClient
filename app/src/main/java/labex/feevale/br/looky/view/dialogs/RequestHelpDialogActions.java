@@ -1,7 +1,6 @@
 package labex.feevale.br.looky.view.dialogs;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.controller.ResponseHelpTask;

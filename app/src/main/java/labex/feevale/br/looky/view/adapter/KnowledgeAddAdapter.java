@@ -13,8 +13,8 @@ import java.util.List;
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Knowledge;
-import labex.feevale.br.looky.service.utils.KnowledgesTask;
 import labex.feevale.br.looky.service.RemoveKnowledge;
+import labex.feevale.br.looky.service.utils.KnowledgesTask;
 
 /**
  * Created by 0139612 on 16/12/2014.

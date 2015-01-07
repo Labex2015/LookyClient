@@ -3,7 +3,6 @@ package labex.feevale.br.looky.model;
 import com.google.gson.annotations.Expose;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 

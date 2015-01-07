@@ -5,33 +5,22 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-
 
 import java.util.Arrays;
 import java.util.List;
 
 import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.model.RequestHelp;
-import labex.feevale.br.looky.service.CancelHelpService;
-import labex.feevale.br.looky.service.GCMService;
 import labex.feevale.br.looky.service.GetPositionService;
-import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
-import labex.feevale.br.looky.view.adapter.DrawerAdapter;
-import labex.feevale.br.looky.view.adapter.DrawerHandler;
 import labex.feevale.br.looky.view.adapter.ItemAdapter;
 import labex.feevale.br.looky.view.dialogs.CloseAppAction;
 import labex.feevale.br.looky.view.dialogs.DialogMaker;
@@ -41,10 +30,7 @@ import labex.feevale.br.looky.view.fragment.LoginFragment;
 import labex.feevale.br.looky.view.fragment.MainFragment;
 import labex.feevale.br.looky.view.fragment.RegisterFragment;
 
-
 import static labex.feevale.br.looky.R.drawable.icon_action_bar;
-import static labex.feevale.br.looky.R.id.drawer_layout;
-import static labex.feevale.br.looky.R.id.navigation_drawer;
 
 
 public class MainActivity extends FragmentActivity {

@@ -19,7 +19,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Date;
+
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.controller.SendMessageTask;
 import labex.feevale.br.looky.model.ChatResponse;

@@ -11,13 +11,11 @@ import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.User;
-import labex.feevale.br.looky.service.ServiceHandler;
 import labex.feevale.br.looky.service.utils.ProcessMessage;
 import labex.feevale.br.looky.utils.AppHelp;
 import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
-import labex.feevale.br.looky.utils.PreferencesHelp;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**

@@ -2,7 +2,6 @@ package labex.feevale.br.looky.service;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.widget.Toast;
 
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.ResponseHelp;
@@ -10,7 +9,6 @@ import labex.feevale.br.looky.utils.AppHelp;
 import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
-import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**
  * Created by 0118230 on 29/12/2014.

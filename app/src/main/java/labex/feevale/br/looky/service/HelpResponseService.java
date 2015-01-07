@@ -1,10 +1,8 @@
 package labex.feevale.br.looky.service;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.widget.Toast;
 
-import labex.feevale.br.looky.model.Message;
 import labex.feevale.br.looky.model.ResponseHelp;
 import labex.feevale.br.looky.utils.AppHelp;
 import labex.feevale.br.looky.utils.AppVariables;

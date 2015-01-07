@@ -1,8 +1,6 @@
 package labex.feevale.br.looky.service;
 
-import android.app.Activity;
 import android.content.Context;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

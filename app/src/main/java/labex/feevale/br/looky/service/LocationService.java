@@ -4,10 +4,12 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import labex.feevale.br.looky.model.User;
-import labex.feevale.br.looky.utils.PreferencesHelp;
+import labex.feevale.br.looky.service.utils.BaseServiceAction;
+import labex.feevale.br.looky.utils.AppVariables;
+import labex.feevale.br.looky.utils.JsonUtils;
+import labex.feevale.br.looky.utils.MessageResponse;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 
@@ -27,24 +29,18 @@ public class LocationService implements  LocationListener{
             user.setLatitude(location.getLatitude());
             user.setLongitude(location.getLongitude());
             preferencesUtils.saveUser(context, user);
-            NotifyPositionService notifyPositionService = new NotifyPositionService(context);
-            notifyPositionService.execute();
+            String URL = AppVariables.URL + AppVariables.POSITION_VERB;
+            new BaseHandler<MessageResponse>(new MessageResponse(), new JsonUtils().UserToJson(user),
+                            URL, context,BaseHandler.SERVICE, BaseHandler.POST).makeServiceCall();
         }
     }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
+    public void onStatusChanged(String s, int i, Bundle bundle) {}
 
     @Override
-    public void onProviderEnabled(String s) {
-
-    }
+    public void onProviderEnabled(String s) {}
 
     @Override
-    public void onProviderDisabled(String s) {
-
-    }
-
+    public void onProviderDisabled(String s) {}
 }

@@ -1,13 +1,10 @@
 package labex.feevale.br.looky.view.dialogs;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 
 /**

@@ -1,7 +1,6 @@
 package labex.feevale.br.looky.view.fragment;
 
 
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,7 +21,6 @@ import java.util.List;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.User;
 import labex.feevale.br.looky.service.RequestHelpService;
-import labex.feevale.br.looky.utils.PreferencesHelp;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.wrapper.HelpWrapper;
 

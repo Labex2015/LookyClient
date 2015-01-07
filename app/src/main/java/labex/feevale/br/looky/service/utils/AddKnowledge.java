@@ -13,7 +13,6 @@ import labex.feevale.br.looky.service.ServiceHandler;
 import labex.feevale.br.looky.utils.AppHelp;
 import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
-import labex.feevale.br.looky.utils.PreferencesHelp;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**

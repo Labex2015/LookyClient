@@ -1,7 +1,9 @@
 package labex.feevale.br.looky.service;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +16,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
 import labex.feevale.br.looky.model.ServiceError;
 import labex.feevale.br.looky.service.utils.BaseServiceAction;
 import labex.feevale.br.looky.service.utils.HttpGetWithEntity;
@@ -58,6 +61,12 @@ public class BaseHandler<T> {
                        Integer methodConnection, BaseServiceAction serviceAction) {
         this(entity, url, context, type, methodConnection);
         this.serviceAction = serviceAction;
+        this.params = params;
+    }
+
+    public BaseHandler(T entity, String params,  String url, Context context, Integer type,
+                       Integer methodConnection) {
+        this(entity, url, context, type, methodConnection);
         this.params = params;
     }
 
@@ -150,14 +159,29 @@ public class BaseHandler<T> {
             serviceAction.finalizeAction();
 
         if(type == TASK)
-            Toast.makeText(context, messageResponse.getMsg(), Toast.LENGTH_LONG).show();
+            ((Activity)getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, messageResponse.getMsg(), Toast.LENGTH_LONG).show();
+                }
+            });
     }
 
-    private void close(T entity){
+    private void close(final T entity){
         if(serviceAction != null)
             serviceAction.finalizeAction();
 
-        serviceAction.finalize(entity);
+        if(type == TASK){
+            ((Activity)getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    serviceAction.finalize(entity);
+                }
+            });
+        }else{
+            serviceAction.finalize(entity);
+        }
+
     }
 
 

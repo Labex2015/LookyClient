@@ -2,7 +2,6 @@ package labex.feevale.br.looky.controller;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import labex.feevale.br.looky.model.Message;
 import labex.feevale.br.looky.service.SendMessageService;

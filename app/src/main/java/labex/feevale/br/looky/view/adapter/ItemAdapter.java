@@ -9,15 +9,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import labex.feevale.br.looky.controller.LoadRequestHelpFragment;
-import labex.feevale.br.looky.view.fragment.ListHelpersFragment;
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Area;
 import labex.feevale.br.looky.model.Knowledge;
 import labex.feevale.br.looky.model.User;
-import labex.feevale.br.looky.service.LoadProfileService;
-import labex.feevale.br.looky.service.GetKnowledges;
+import labex.feevale.br.looky.view.fragment.ListHelpersFragment;
 
 /**
  * Created by Vitor/Thaiane on 18/12/2014.
@@ -49,17 +46,17 @@ public enum ItemAdapter { // TODO trocar para dados reias!
     },
     KNOWLEDGES("Knowledges"){
         public void executeAction(Activity activity){
-            new GetKnowledges(activity).execute();
+
         }
     },
     REQUESTS("Requests"){
         public void executeAction(Activity activity){
-            new LoadRequestHelpFragment("Carregando tela de ajuda!", activity).execute();
+
         }
     },
     PROFILE("Profile"){
         public void executeAction(Activity activity){
-            new LoadProfileService(activity).execute(1L);
+
         }
     };
 

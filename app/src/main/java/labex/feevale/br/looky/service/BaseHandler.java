@@ -54,25 +54,17 @@ public abstract class BaseHandler<T> {
         messageResponse = new MessageResponse("", false);
     }
 
+    public BaseHandler(T entity, String params,  String url, Context context, Integer type,
+                       Integer methodConnection, BaseServiceAction serviceAction) {
+        this(entity, url, context, type, methodConnection);
+        this.serviceAction = serviceAction;
+        this.params = params;
+    }
+
     public BaseHandler(T entity, String url, Context context, Integer type,
                        Integer methodConnection, BaseServiceAction serviceAction) {
         this(entity, url, context, type, methodConnection);
         this.serviceAction = serviceAction;
-    }
-
-    protected BaseHandler(T entity, String params, String url, Context context,
-                          Integer type, Integer methodConnection) {
-        this(entity, url, context, type, methodConnection);
-        this.params = params;
-    }
-
-    protected BaseHandler(T entity, String params, String url, Context context,
-                          MessageResponse messageResponse, Integer type, Integer methodConnection,
-                                          BaseServiceAction baseServiceAction) {
-        this(entity, url, context, type, methodConnection, baseServiceAction);
-        this.params = params;
-        this.messageResponse = messageResponse;
-        this.serviceAction = baseServiceAction;
     }
 
 
@@ -155,7 +147,7 @@ public abstract class BaseHandler<T> {
 
     private void onExceptionValidation(){
         if(serviceAction != null)
-            serviceAction.finalize();
+            serviceAction.finalizeAction();
 
         if(type == TASK)
             Toast.makeText(context, messageResponse.getMsg(), Toast.LENGTH_LONG).show();
@@ -163,11 +155,19 @@ public abstract class BaseHandler<T> {
 
     private void close(T entity){
         if(serviceAction != null)
-            serviceAction.finalize();
+            serviceAction.finalizeAction();
 
         finalize(entity);
     }
 
     protected abstract void finalize(T entity);
 
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 }

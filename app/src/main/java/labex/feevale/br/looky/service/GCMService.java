@@ -13,13 +13,16 @@ import java.io.IOException;
 
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.User;
+import labex.feevale.br.looky.service.utils.BaseServiceAction;
 import labex.feevale.br.looky.service.utils.GCMVariables;
+import labex.feevale.br.looky.utils.JsonUtils;
+import labex.feevale.br.looky.view.dialogs.LoadingDialog;
 import labex.feevale.br.looky.wrapper.RegisterLogin;
 
 /**
  * Created by 0126128 on 18/12/2014.
  */
-public class GCMService extends AsyncTask<Void, String,String>{
+public class GCMService extends AsyncTask<Void, String,String> implements BaseServiceAction{
 
     private GoogleCloudMessaging gcm;
     private Activity activity;
@@ -28,6 +31,9 @@ public class GCMService extends AsyncTask<Void, String,String>{
     private ProgressDialog dialog;
     public static final int LOGIN = 1;
     public static final int REGISTER = 2;
+
+    private String params;
+    private LoadingDialog loadingDialog;
 
     public GCMService(Activity activity, RegisterLogin registerLogin, int operation) {
         gcm = GoogleCloudMessaging.getInstance(activity);
@@ -39,10 +45,8 @@ public class GCMService extends AsyncTask<Void, String,String>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog = new ProgressDialog(activity);
-        dialog.setMessage(activity.getResources().getString(R.string.LOADING));
-        dialog.setCancelable(false);
-        dialog.show();
+        initAction();
+        params = new JsonUtils().RegisterLoginToJson(registerLogin);
     }
 
     @Override
@@ -69,17 +73,24 @@ public class GCMService extends AsyncTask<Void, String,String>{
             registerLogin.setUserKey(s);
             switch (operation){
                 case LOGIN:
-                    new LoginService(activity,registerLogin, dialog).execute();
+                    new LoginService(new User(), params, activity, BaseHandler.TASK, BaseHandler.POST, this).makeServiceCall();
                     break;
                 case REGISTER:
                     new RegisterService(activity,registerLogin, dialog).execute();
                     break;
             }
-        }else{
-            if(dialog.isShowing())
-                dialog.dismiss();
-            Toast.makeText(activity, "Problemas ao gerar GCM, " +
-                    "verifique sua conexão com a internet!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void initAction() {
+        loadingDialog = new LoadingDialog(activity);
+        loadingDialog.show();
+    }
+
+    @Override
+    public void finalizeAction() {
+        if(loadingDialog.isShowing())
+            loadingDialog.dismiss();
     }
 }

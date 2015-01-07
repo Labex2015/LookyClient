@@ -5,6 +5,6 @@ package labex.feevale.br.looky.service.utils;
  */
 public interface BaseServiceAction {
 
-    public void init();
-    public void finalize();
+    public void initAction();
+    public void finalizeAction();
 }

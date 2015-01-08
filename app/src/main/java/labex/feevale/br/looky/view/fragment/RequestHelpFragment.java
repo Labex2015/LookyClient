@@ -9,7 +9,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -109,6 +111,10 @@ public class RequestHelpFragment extends Fragment{
             helpWrapper.user = user;
             helpWrapper.searchTerms = values;
             helpWrapper.text = "O usuario " + user.getUserName() + ", precisa de ajuda.";
+
+
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(tags.getWindowToken(), 0);
 
             RequestHelpService requestHelpService = new RequestHelpService(getActivity());
             requestHelpService.execute(helpWrapper);

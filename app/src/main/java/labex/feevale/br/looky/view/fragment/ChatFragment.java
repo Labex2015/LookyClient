@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,15 +91,7 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String valor = campoMensagem.getText().toString().trim();
-                message = new Message();
-                message.setText(valor);
-                message.setDate(new Date());
-                message.setIdFrom(idFrom);
-                message.setIdTo(idTo);
-
-                new SendMessageTask(message,processChat, getActivity()).execute();
-
+                sendMessageAction();
             }
         });
 
@@ -169,6 +160,17 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
         campoMensagem.setText("");
     }
 
+    private void sendMessageAction(){
+        String valor = campoMensagem.getText().toString().trim();
+        message = new Message();
+        message.setText(valor);
+        message.setDate(new Date());
+        message.setIdFrom(idFrom);
+        message.setIdTo(idTo);
+
+        new SendMessageTask(message,processChat, getActivity()).execute();
+    }
+
     @Override
     public void executeActionFail(MessageResponse messageResponse) {
         Toast.makeText(getActivity(), messageResponse.getMsg(), Toast.LENGTH_LONG).show();
@@ -188,5 +190,11 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
     public void onDestroy() {
         super.onDestroy();
         new SharedPreferencesUtils().saveChatStatus(false, getActivity());
+    }
+
+    public void onExit(){
+        campoMensagem.setText("O usuário "+new SharedPreferencesUtils().getUSer(activity).getUserName()
+                    +" saiu do chat.");
+        sendMessageAction();
     }
 }

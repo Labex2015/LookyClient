@@ -3,7 +3,6 @@ package labex.feevale.br.looky;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -12,7 +11,6 @@ import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -30,7 +28,6 @@ import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
 import labex.feevale.br.looky.view.fragment.LoginFragment;
 import labex.feevale.br.looky.view.fragment.MainFragment;
-import labex.feevale.br.looky.view.fragment.ProfileUserFragment;
 import labex.feevale.br.looky.view.fragment.RegisterFragment;
 
 import static labex.feevale.br.looky.R.drawable.icon_action_bar;
@@ -100,7 +97,6 @@ public class MainActivity extends FragmentActivity {
 
                 if (params.containsKey("CHAT")) {
                     ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
-                    Log.e("MainActivity", "MainActivity: " + chatResponse.getText());
                     changeFragment(new ChatFragment(this, chatResponse));
                 } else if (params.containsKey("REQUEST")) {
                     RequestHelp requestHelp = (RequestHelp) params.getSerializable("REQUEST");
@@ -165,7 +161,10 @@ public class MainActivity extends FragmentActivity {
                 break;
 
             case R.id.action_chat_logout:
-                //TODO sair do chat
+                if(mFragment instanceof ChatFragment)
+                    ((ChatFragment)mFragment).onExit();
+
+                loadMainFragment();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -222,11 +221,13 @@ public class MainActivity extends FragmentActivity {
                 new SharedPreferencesUtils().getUSer(this).getId() == 0) {
             changeFragment(new LoginFragment(this));
         }else{
-            if (mFragment instanceof ChatFragment) {
+            if(mFragment instanceof ChatFragment){
 
-            } else if (mFragment instanceof MainFragment) {
+            }else if(mFragment instanceof MainFragment) {
                 new DialogMaker("Sair do aplicativo?", "Você quer sair do aplicativo?",
                         new CloseAppAction(this)).createDialog(this).show();
+            }else {
+                super.onBackPressed();
             }
         }
     }

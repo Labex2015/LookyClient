@@ -2,7 +2,6 @@ package labex.feevale.br.looky.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import labex.feevale.br.looky.model.User;
 
@@ -73,7 +72,6 @@ public class SharedPreferencesUtils {
 
     public Boolean isChatActive(Context context){
         SharedPreferences preferences = returnMySharedPref(context);
-        Log.e("SHAREDPREF", "Status "+preferences.getBoolean(CHAT_CURRENT_ACTIVE, false));
         return preferences.getBoolean(CHAT_CURRENT_ACTIVE, false);
     }
 

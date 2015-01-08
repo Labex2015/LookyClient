@@ -14,9 +14,9 @@ public class AppVariables {
     public static final String KNOWLEDGE_VERB = "knowledges";
     public static final String AREAS_NAME = "area/list/name";
     public static final String CHAT = "chat";
-    public static final String REQUEST_USER_HELP = "/user/#ID_USER/request/#ID_HELPER";
-    public static final String RESPONSE_USER_REQUEST = "/response/#ID_USER//request/";
-    public static final String RESPONSE_USER_REQUEST_DENIED = "/response/user/#ID_USER/request/";
+    public static final String REQUEST_USER_HELP = "user/#ID_USER/request/#ID_HELPER";
+    //public static final String RESPONSE_USER_REQUEST = "response/#ID_USER/request/";
+    public static final String RESPONSE_USER_REQUEST = "response/user/#ID_USER/request/";
     public static final String REGISTER_USER = "user";
     public static final String LOGIN_USER = "user/login";
 

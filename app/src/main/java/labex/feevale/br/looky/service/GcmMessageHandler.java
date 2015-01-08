@@ -1,6 +1,5 @@
 package labex.feevale.br.looky.service;
 
-import android.app.ActivityManager;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,11 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-
-import java.util.List;
 
 import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
@@ -26,7 +22,6 @@ import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
-import labex.feevale.br.looky.view.fragment.ChatFragment;
 
 /**
  * Created by 0126128 on 18/12/2014.
@@ -86,7 +81,6 @@ public class GcmMessageHandler extends IntentService{
         Intent chat = new Intent(this, MainActivity.class);
         chat.putExtra(GCMVariables.ITEM_TO_LOAD, GCMVariables.CHAT);
         chat.putExtra("TYPE_FRAG", argsBundle);
-        Log.e("NOTIFY",  "Notify: "+chatResponse.getText());
 
         PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(),
                 1000,chat, PendingIntent.FLAG_CANCEL_CURRENT);

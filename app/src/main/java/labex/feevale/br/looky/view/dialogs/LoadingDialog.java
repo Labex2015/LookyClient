@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.webkit.WebView;
 import android.widget.ImageView;
 
 import labex.feevale.br.looky.R;

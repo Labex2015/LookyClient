@@ -2,6 +2,7 @@ package labex.feevale.br.looky.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import labex.feevale.br.looky.model.User;
 
@@ -17,6 +18,8 @@ public class SharedPreferencesUtils {
     public static final String KEY_LONGITUDE = "USER_LONGITUDE";
     public static final String KEY_USERNAME = "USER_USERNAME";
     public static final String KEY_EMAIL = "USER_EMAIL";
+
+    public static final String CHAT_CURRENT_ACTIVE = "CHAT_CURRENT_ACTIVE";
 
 
     public void saveUser(Context context, User user) {
@@ -65,6 +68,18 @@ public class SharedPreferencesUtils {
     public void clear(Context context){
         SharedPreferences.Editor editor = returnMySharedPref(context).edit();
         editor.clear();
+        editor.commit();
+    }
+
+    public Boolean isChatActive(Context context){
+        SharedPreferences preferences = returnMySharedPref(context);
+        Log.e("SHAREDPREF", "Status "+preferences.getBoolean(CHAT_CURRENT_ACTIVE, false));
+        return preferences.getBoolean(CHAT_CURRENT_ACTIVE, false);
+    }
+
+    public void saveChatStatus(Boolean status, Context context){
+        SharedPreferences.Editor editor = returnMySharedPref(context).edit();
+        editor.putBoolean(CHAT_CURRENT_ACTIVE, status);
         editor.commit();
     }
 }

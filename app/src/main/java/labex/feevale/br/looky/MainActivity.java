@@ -3,6 +3,7 @@ package labex.feevale.br.looky;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -98,9 +100,7 @@ public class MainActivity extends FragmentActivity {
 
                 if (params.containsKey("CHAT")) {
                     ChatResponse chatResponse = (ChatResponse) params.getSerializable("CHAT");
-                    params.clear();
-                    getIntent().removeExtra("TYPE_FRAG");
-
+                    Log.e("MainActivity", "MainActivity: " + chatResponse.getText());
                     changeFragment(new ChatFragment(this, chatResponse));
                 } else if (params.containsKey("REQUEST")) {
                     RequestHelp requestHelp = (RequestHelp) params.getSerializable("REQUEST");
@@ -128,6 +128,9 @@ public class MainActivity extends FragmentActivity {
      */
     public void changeFragment(Fragment fragment){
         super.onPostResume();
+        if(!(fragment instanceof ChatFragment))
+            new SharedPreferencesUtils().saveChatStatus(false, this);
+
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_EXIT_MASK);
         fragmentTransaction.replace(R.id.container, fragment);
@@ -224,10 +227,6 @@ public class MainActivity extends FragmentActivity {
             } else if (mFragment instanceof MainFragment) {
                 new DialogMaker("Sair do aplicativo?", "Você quer sair do aplicativo?",
                         new CloseAppAction(this)).createDialog(this).show();
-            } else if (mFragment instanceof RegisterFragment) {
-                changeFragment(new LoginFragment(this));
-            } else if (!(mFragment instanceof ProfileUserFragment)) {
-                changeFragment(new MainFragment());
             }
         }
     }
@@ -253,6 +252,8 @@ public class MainActivity extends FragmentActivity {
 
     **/
 
-
+    public Fragment getmFragment() {
+        return mFragment;
+    }
 }
 

@@ -179,7 +179,8 @@ public class BaseHandler<T> {
                 }
             });
         }else{
-            serviceAction.finalize(entity);
+            if(serviceAction != null)
+                serviceAction.finalize(entity);
         }
 
     }

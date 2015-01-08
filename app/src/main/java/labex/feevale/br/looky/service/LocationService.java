@@ -6,7 +6,6 @@ import android.location.LocationListener;
 import android.os.Bundle;
 
 import labex.feevale.br.looky.model.User;
-import labex.feevale.br.looky.service.utils.BaseServiceAction;
 import labex.feevale.br.looky.utils.AppVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;

@@ -7,25 +7,30 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.Knowledge;
-import labex.feevale.br.looky.service.RemoveKnowledge;
-import labex.feevale.br.looky.service.utils.KnowledgesTask;
+import labex.feevale.br.looky.service.BaseHandler;
+import labex.feevale.br.looky.service.utils.BaseServiceAction;
+import labex.feevale.br.looky.utils.AppVariables;
+import labex.feevale.br.looky.utils.MessageResponse;
+import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 
 /**
  * Created by 0139612 on 16/12/2014.
  */
-public class KnowledgeAddAdapter extends BaseAdapter {
+public class KnowledgeAddAdapter extends BaseAdapter implements BaseServiceAction<MessageResponse>{
     private List<Knowledge> knowledgeList;
     private Context context;
+    private BaseServiceAction serviceAction;
 
     public KnowledgeAddAdapter(List<Knowledge> knowledgeList, Context context) {
         this.knowledgeList = knowledgeList;
         this.context = context;
+        serviceAction = this;
     }
 
     @Override
@@ -66,11 +71,33 @@ public class KnowledgeAddAdapter extends BaseAdapter {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {//TODO:Adicionar um observer para notificar alteração na lista, ou algum padrão decente
-                RemoveKnowledge removeKnowledge = new RemoveKnowledge(context,knowledge, knowledgeList);
-                removeKnowledge.notifyAdapterChanged(baseAdapter);
-                new KnowledgesTask(removeKnowledge,(MainActivity)context, removeKnowledge).execute();
-                notifyDataSetChanged();
+                String url = AppVariables.URL+ AppVariables.USER_VERB +new SharedPreferencesUtils().getUSer(context).getId()
+                        + "/knowledge/remove/"+ knowledge.getArea().getId();
+                new BaseHandler<MessageResponse>(new MessageResponse(),url, context, BaseHandler.TASK,
+                        BaseHandler.POST, serviceAction).makeServiceCall();
             }
         };
+    }
+
+    @Override
+    public void initAction() {
+        //TODO: Adicionar chamada ao dialog
+    }
+
+    @Override
+    public void finalizeAction() {
+        //TODO: Encerrar exibição do dialog
+    }
+
+    @Override
+    public void finalize(MessageResponse entity) {
+        if(entity != null){
+            if(entity.getStatus())
+                notifyDataSetChanged();
+
+            Toast.makeText(context,entity.getMsg(), Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(context,"Problemas ao remover dado.", Toast.LENGTH_LONG).show();
+        }
     }
 }

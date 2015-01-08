@@ -76,7 +76,8 @@ public class GCMService extends AsyncTask<Void, String,String> implements BaseSe
     protected void onPostExecute(String s) {
         if(s != null && s.length() != 0){
             registerLogin.setUserKey(s);
-            new BaseHandler<User>(new User(), params, (operation == GCMService.LOGIN) ? URL_LOGIN : URL_REGISTER,
+            new BaseHandler<User>(new User(), new JsonUtils().RegisterLoginToJson(registerLogin),
+                    (operation == GCMService.LOGIN) ? URL_LOGIN : URL_REGISTER,
                     activity, BaseHandler.TASK, BaseHandler.POST, this).makeServiceCall();
         }
     }

@@ -55,7 +55,6 @@ public class ListKnowledgeFragment extends Fragment {
         if(savedInstanceState == null) {
             setRetainInstance(true);
         }
-
     }
 
     @Override
@@ -113,7 +112,6 @@ public class ListKnowledgeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
                 area.setName(txAutoComplete.getText().toString().trim());
                 knowledge.setArea(area);
 
@@ -125,12 +123,4 @@ public class ListKnowledgeFragment extends Fragment {
         };
     }
 
-    public void verifyNivelAndView(String nivel){
-        if(nivel.equals(Knowledge.INITIATE))
-            basic.setSelected(true);
-        else if(nivel.equals(Knowledge.ADVANCED))
-            advanced.setSelected(true);
-        else if (nivel.equals(Knowledge.INTERMEDIARY))
-            intermediary.setSelected(true);
-    }
 }

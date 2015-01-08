@@ -17,7 +17,7 @@
     <string name="NO">NÃO</string>
     <string name="NEW_KNOWLEDGE_TITLE">Novo conhecimento</string>
     <string name="LOGOUT">Deseja fazer Logout?</string>
-    <string name="LOADING">Aguarde...</string>
+    <string name="LOADING">Carregando...</string>
 
     <!--NOTIFICATIONS-->
     <string name="HELP_ACCEPT">Pedido de ajuda aceito!</string>

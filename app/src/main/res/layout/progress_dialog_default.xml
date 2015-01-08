@@ -2,23 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_margin="16dp"
+    android:background="@drawable/dialog_format">
+
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/logo" />
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_height="100dp"
+        android:id="@+id/loading"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"/>
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
-        android:text="Carregando....."/>
+        android:text="@string/LOADING"/>
 
 </LinearLayout>

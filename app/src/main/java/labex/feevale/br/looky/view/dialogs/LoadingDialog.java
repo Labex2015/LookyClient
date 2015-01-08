@@ -2,8 +2,11 @@ package labex.feevale.br.looky.view.dialogs;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.widget.ImageView;
 
 import labex.feevale.br.looky.R;
 
@@ -21,6 +24,18 @@ public class LoadingDialog extends ProgressDialog{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.progress_dialog_default);
+
+        final ImageView animImageView = (ImageView) findViewById(R.id.loading);
+
+        animImageView.setBackgroundResource(R.drawable.animation_loading);
+        animImageView.post(new Runnable() {
+            @Override
+            public void run() {
+                AnimationDrawable frameAnimation =  (AnimationDrawable) animImageView.getBackground();
+                frameAnimation.start();
+            }
+        });
+
         setCancelable(false);
         setIndeterminate(true);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

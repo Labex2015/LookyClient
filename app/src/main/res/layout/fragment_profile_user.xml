@@ -26,11 +26,11 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Solicitar ajuda"
             android:id="@+id/buttonRequestHelp"
-            android:src="@drawable/btn_send_message"
             android:layout_above="@+id/listV_knowledges"
+            android:layout_margin="16dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/help_button"/>
     </RelativeLayout>
 </FrameLayout>

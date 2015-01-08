@@ -67,7 +67,7 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(onNotice, new IntentFilter("Msg"));
-
+        new SharedPreferencesUtils().saveChatStatus(true, getActivity());
         if(savedInstanceState == null){
             setRetainInstance(true);
             this.processChat = this;
@@ -177,12 +177,16 @@ public class ChatFragment extends android.support.v4.app.Fragment implements Pro
     private BroadcastReceiver onNotice = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            chatResponse = null;
             chatResponse = (ChatResponse) intent.getSerializableExtra("CHAT");
-            //chatResponse = new JsonUtils().JsonToChatResponse(intent.getStringExtra("CHAT"));
             if(chatResponse != null)
                 setReponse(chatResponse);
-            else
-                Log.e("LOG","Não veio o chat!");
         }
     };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        new SharedPreferencesUtils().saveChatStatus(false, getActivity());
+    }
 }

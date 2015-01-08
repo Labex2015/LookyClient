@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
+import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
+import labex.feevale.br.looky.view.fragment.ChatFragment;
 
 /**
  * Created by 0126128 on 18/12/2014.

@@ -55,9 +55,11 @@ public class RequestHelpDialogActions implements DialogActions, BaseServiceActio
         responseHelp.user = me;
         responseHelp.status = status;
         responseHelp.message = message;
-        me = new SharedPreferencesUtils().getUSer(activity);
-        final String urlFormatted = URL.replace("#ID_USER", userTo.getId().toString());
-        final String params = new JsonUtils().ResponseHelptToJson(responseHelp);
+
+        String auxUrl = URL.replace("#ID_USER", userTo.getId().toString());
+        final String urlFormatted = auxUrl;
+        String auxParam =  new JsonUtils().ResponseHelptToJson(responseHelp);
+        final String params = auxParam;
 
         new AsyncTask<Void, Void, Void>() {
             @Override

@@ -35,7 +35,8 @@ public class KnowledgeAddAdapter extends BaseAdapter implements BaseServiceActio
 
     @Override
     public int getCount() {
-        return knowledgeList.size();
+
+        return knowledgeList != null ? knowledgeList.size() : 0;
     }
 
     @Override

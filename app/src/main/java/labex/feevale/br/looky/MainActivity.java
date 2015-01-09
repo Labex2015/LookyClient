@@ -13,18 +13,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
 
 import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.model.RequestHelp;
+import labex.feevale.br.looky.model.ResponseHelp;
 import labex.feevale.br.looky.service.GetPositionService;
+import labex.feevale.br.looky.utils.MessageResponse;
 import labex.feevale.br.looky.utils.SharedPreferencesUtils;
 import labex.feevale.br.looky.view.adapter.ItemAdapter;
 import labex.feevale.br.looky.view.dialogs.CloseAppAction;
 import labex.feevale.br.looky.view.dialogs.DialogMaker;
 import labex.feevale.br.looky.view.dialogs.RequestHelpDialogActions;
+import labex.feevale.br.looky.view.dialogs.ResponseRequestDialogAction;
 import labex.feevale.br.looky.view.fragment.ChatFragment;
 import labex.feevale.br.looky.view.fragment.LoginFragment;
 import labex.feevale.br.looky.view.fragment.MainFragment;
@@ -103,6 +107,17 @@ public class MainActivity extends FragmentActivity {
                     if (requestHelp != null) {
                         RequestHelpDialogActions actions = new RequestHelpDialogActions(requestHelp.getUser(), this);
                         new DialogMaker("Solicitação de ajuda", requestHelp.getText(), actions).createDialog(this).show();
+                    }
+                } else if (params.containsKey("RESPONSE")) {
+                    ResponseHelp responseHelp = (ResponseHelp) params.getSerializable("RESPONSE");
+                    if (responseHelp != null) {
+                        if(responseHelp.status) {
+                            ResponseRequestDialogAction action = new ResponseRequestDialogAction(this,
+                                    new SharedPreferencesUtils().getUSer(this).getId(), responseHelp.user.getId());
+                            new DialogMaker("Resposta...", responseHelp.message, action).createDialog(this).show();
+                        }else{
+                            Toast.makeText(this, responseHelp.message, Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             } else {

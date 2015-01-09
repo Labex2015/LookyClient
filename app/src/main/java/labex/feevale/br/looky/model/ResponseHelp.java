@@ -2,11 +2,13 @@ package labex.feevale.br.looky.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by 0118230 on 19/12/2014.
  */
 
-public class ResponseHelp {
+public class ResponseHelp implements Serializable{
 
     @Expose
     public String message;

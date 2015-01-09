@@ -62,6 +62,12 @@ public class RequestHelpDialogActions implements DialogActions, BaseServiceActio
         final String params = auxParam;
 
         new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected void onPreExecute() {
+                initAction();
+            }
+
             @Override
             protected Void doInBackground(Void... voids) {
                 new BaseHandler<MessageResponse>(new MessageResponse(), params, urlFormatted, activity,

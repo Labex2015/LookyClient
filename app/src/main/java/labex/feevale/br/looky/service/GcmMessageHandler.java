@@ -18,6 +18,7 @@ import labex.feevale.br.looky.MainActivity;
 import labex.feevale.br.looky.R;
 import labex.feevale.br.looky.model.ChatResponse;
 import labex.feevale.br.looky.model.RequestHelp;
+import labex.feevale.br.looky.model.ResponseHelp;
 import labex.feevale.br.looky.service.utils.GCMVariables;
 import labex.feevale.br.looky.utils.JsonUtils;
 import labex.feevale.br.looky.utils.MessageResponse;
@@ -66,7 +67,7 @@ public class GcmMessageHandler extends IntentService{
                         notifyRequestUserHelp(message);
                         break;
                     case GCMVariables.TYPE_RESPONSE_HELP:
-
+                        notifyResponseUser(message);
                         break;
                 }
             }
@@ -103,14 +104,14 @@ public class GcmMessageHandler extends IntentService{
     }
 
     public void notifyResponseUser(String response) {
-        MessageResponse messageResponse = new JsonUtils().JsonToMessageResponse(response);
+        ResponseHelp responseHelp = (ResponseHelp)new JsonUtils<ResponseHelp>(new ResponseHelp()).process(response);
         Bundle argsBundle = new Bundle();
-        argsBundle.putSerializable("RESPONSE", messageResponse);
+        argsBundle.putSerializable("RESPONSE", responseHelp);
         Intent helpIntent = new Intent(this, MainActivity.class);
         helpIntent.putExtra("TYPE_FRAG", argsBundle);
 
         PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, helpIntent, 0);
-        showNotification(getApplicationContext(), "Seu pedido de ajuda foi respondido!", messageResponse.getMsg(),
+        showNotification(getApplicationContext(), "Seu pedido de ajuda foi respondido!", responseHelp.message,
                 getResources().getString(R.string.app_name), R.drawable.ic_launcher, contentIntent);
     }
 

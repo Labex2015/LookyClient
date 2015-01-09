@@ -27,10 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonRequestHelp"
-            android:layout_above="@+id/listV_knowledges"
-            android:layout_margin="16dp"
+            android:layout_margin="15dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/help_button"/>
     </RelativeLayout>
 </FrameLayout>

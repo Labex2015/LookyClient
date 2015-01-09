@@ -60,9 +60,6 @@ public class ListHelperAdapter extends BaseAdapter{
         User user       = (User) getItem(position);
         view            = LayoutInflater.from(context).inflate(R.layout.fragment_item_helper,null);
 
-        labelPage       = (TextView) view.findViewById(R.id.item_helper_labelPage);
-        labelPage.setText(R.string.list_helpers_label_page);
-        labelPage.setTypeface(tf);
         mName           = (TextView) view.findViewById(R.id.textName);
         mName.setTypeface(tf);
         mKnowledge      = (TextView) view.findViewById(R.id.textknowledge);

@@ -1,6 +1,7 @@
 package labex.feevale.br.looky.service.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.widget.Toast;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import labex.feevale.br.looky.wrapper.KnowledgeWrapper;
 public class KnowledgesServiceAction implements BaseServiceAction<KnowledgeWrapper> {
 
     private Activity activity;
+    private ProgressDialog progressDialog;
 
     public KnowledgesServiceAction(Activity activity) {
         this.activity = activity;
@@ -23,12 +25,17 @@ public class KnowledgesServiceAction implements BaseServiceAction<KnowledgeWrapp
 
     @Override
     public void initAction() {
-
+        progressDialog = new ProgressDialog(activity);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Carregando.....");
+        progressDialog.show();
     }
 
     @Override
     public void finalizeAction() {
-
+        if(progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override

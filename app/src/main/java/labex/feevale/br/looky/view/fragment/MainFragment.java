@@ -1,5 +1,6 @@
 package labex.feevale.br.looky.view.fragment;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,8 +43,22 @@ public class MainFragment extends Fragment {
                 public void onClick (View view){
                     if (user != null){
                         final String url = AppVariables.URL + AppVariables.USER_VERB + user.getId() + "/" + AppVariables.KNOWLEDGE_VERB;
-                        new BaseHandler<KnowledgeWrapper>(new KnowledgeWrapper(), url, getActivity(),
-                                BaseHandler.TASK, BaseHandler.GET, new KnowledgesServiceAction(getActivity())).makeServiceCall();
+                        final KnowledgesServiceAction knowledgesServiceAction = new KnowledgesServiceAction(getActivity());
+
+                        new AsyncTask<Void,Void,Void>(){
+
+                            @Override
+                            protected void onPreExecute() {
+                                knowledgesServiceAction.initAction();
+                            }
+
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                new BaseHandler<KnowledgeWrapper>(new KnowledgeWrapper(), url, getActivity(), BaseHandler.TASK, BaseHandler.GET,knowledgesServiceAction).makeServiceCall();
+                                return null;
+                            }
+                        }.execute();
+
                     }
                 }
             };

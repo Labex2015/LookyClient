@@ -3,6 +3,7 @@ package labex.feevale.br.looky.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -50,6 +51,7 @@ public class LoginFragment extends Fragment {
         edtPassword = (EditText) view.findViewById(R.id.edt_password);
         btnLogin = (Button) view.findViewById(R.id.btn_login);
         textRegister = (TextView) view.findViewById(R.id.text_register);
+        textRegister.setPaintFlags(textRegister.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         textRegister.setOnClickListener(toRegister());
         btnLogin.setOnClickListener(login());

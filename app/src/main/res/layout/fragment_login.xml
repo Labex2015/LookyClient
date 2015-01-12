@@ -3,8 +3,6 @@
     android:layout_height="match_parent"
     tools:context="labex.feevale.br.looky.view.fragment.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -26,18 +24,17 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/edt_email"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
             android:hint="@string/HINT_EMAIL"
-            android:background="@drawable/bg_text_box_purple"/>
+            style="@style/edit_text_app"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/edt_password"
@@ -45,27 +42,28 @@
             android:layout_marginTop="16dp"
             android:hint="@string/HINT_PASSWORD"
             android:imeOptions="actionDone"
-            android:background="@drawable/bg_text_box_purple"/>
+            style="@style/edit_text_app"/>
 
-        <TextView
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/LINK_REGISTER"
-            android:id="@+id/text_register"
+            android:layout_height="wrap_content"
+            android:text="@string/BTN_LOGIN"
             android:layout_marginTop="16dp"
-            android:textColor="@color/blue_app"/>
-
+            android:id="@+id/btn_login"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/button_style"/>
     </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/BTN_LOGIN"
-        android:id="@+id/btn_login"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button_style"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/LINK_REGISTER"
+        android:id="@+id/text_register"
+        android:textColor="@color/blue_app"
+        android:textSize="16dp"
+        android:layout_gravity="center_horizontal|bottom"/>
+
 </FrameLayout>

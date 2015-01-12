@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="blue_app">#1F87AC</color>
+    <color name="blue_EditText">#ff1fa4ca</color>
     <color name="purple_app">#5F237D</color>
     <color name="orange_app">#C74F2F</color>
     <color name="dark_gray_fonts_app">#434142</color>

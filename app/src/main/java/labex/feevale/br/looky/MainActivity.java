@@ -128,6 +128,12 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.stopService(mService);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }
@@ -267,6 +273,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     **/
+
 
     public Fragment getmFragment() {
         return mFragment;
